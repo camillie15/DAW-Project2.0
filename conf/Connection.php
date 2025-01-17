@@ -2,14 +2,14 @@
 class Connection {
     public static function getConnection() {
         $dsn = 'mysql:host=localhost;port=3306;dbname=' . DBNAME;
-        $conexion = null;
+        $connection = null;
         try {
-            $conexion = new PDO($dsn, DBUSER, DBPASSWORD);
-             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $connection = new PDO($dsn, DBUSER, DBPASSWORD);
+             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
             echo $e;
             die("Error " . $e->getMessage());
         }      
-        return $conexion;
+        return $connection;
     }
 }
