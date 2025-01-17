@@ -14,7 +14,7 @@ class ReturnsController
 
     public function index()
     {
-        require_once 'view/statics/return.php';
+        require_once 'view/statics/return.static.php';
     }
 
     public function insert_view()
