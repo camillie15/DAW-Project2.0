@@ -5,8 +5,8 @@ define("FUNCION_PRINCIPAL", "index");
 
 
 //ruta de templates
-define("HEADER", 'view/templates/header.php');
-define("FOOTER", 'view/templates/footer.php');
+define("HEADER", 'view/template/header.php');
+define("FOOTER", 'view/template/footer.php');
 
 
 // path module view returns
