@@ -1,6 +1,6 @@
 <?php
 //FrontController
-require_once 'config/config.php';
+require_once 'conf/config.php';
 // leer parametros
 
 $controlador = (!empty($_REQUEST['c'])) ? htmlentities($_REQUEST['c']) : CONTROLADOR_PRINCIPAL;
