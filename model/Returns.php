@@ -5,8 +5,18 @@ class Returns
 
     function __construct()
     {
-        $this->returnId = 0;
+        $this->returnId = null;
+        $this->userId = null;
+        $this->requestDate = null;
+        $this->purchaseDate = null;
+        $this->productStatus = null;
+        $this->productCode = null;
+        $this->invoiceCode = null;
+        $this->description = null;
+        $this->requestStatus = null;
+        $this->status = null;
     }
+
 
     public function getReturnId()
     {
@@ -106,5 +116,16 @@ class Returns
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    public function __get($var)
+    {
+        return $this->$var;
+    }
+
+    // Métodos setter si deseas establecer valores
+    public function __set($var, $value)
+    {
+        $this->$var = $value;
     }
 }

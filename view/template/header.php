@@ -40,7 +40,7 @@ if (!empty($_SESSION['userLogged'])) {
   if ($rol == 1) {
   ?>
     <nav class="nav-links">
-      <a href="#">Devolucion</a>
+      <a href="index.php?c=returns&f=index">Devolucion</a>
       <a href="#">Garantia</a>
       <a href="#">FAQ</a>
       <a href="#">Contactar</a>
@@ -54,7 +54,7 @@ if (!empty($_SESSION['userLogged'])) {
   if ($rol == 2) {
   ?>
     <nav class="nav-links">
-      <a href="#">Devoluciones</a>
+      <a href="index.php?c=returns&f=list_view">Devoluciones</a>
       <a href="#">Garantias</a>
     </nav>
   <?php

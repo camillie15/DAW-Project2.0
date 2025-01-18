@@ -11,11 +11,10 @@ class ReturnsDAO
         $this->connection = Connection::getConnection();
     }
 
+    /*----------CREATE----------*/
     public function insertReturnRequest($return)
     {
         try {
-/*             $script = "INSERT INTO returns (requestDate, purchaseDate ,invoiceCode, productSatus, description ,productCode, requestStatus, status) 
-            VALUES (?,?,?,?,?,?,?)"; */
             $script = "INSERT INTO returns (requestDate, purchaseDate ,invoiceCode, productStatus, productCode, description, requestStatus, status) 
             VALUES (?,?,?,?,?,?,?,?)";
 
@@ -28,7 +27,7 @@ class ReturnsDAO
             $stmt->bindParam(5, $return->getProductCode(), PDO::PARAM_STR);
             $stmt->bindParam(6, $return->getDescription(), PDO::PARAM_STR);
             $stmt->bindParam(7, $return->getRequestStatus(), PDO::PARAM_INT);
-            $stmt->bindParam(8, $return->getStatus(), PDO::PARAM_INT); 
+            $stmt->bindParam(8, $return->getStatus(), PDO::PARAM_INT);
             /*             
             $stmt->bindParam(':userId', $return->getUserId(), PDO::PARAM_INT); 
             */
@@ -39,11 +38,130 @@ class ReturnsDAO
         }
     }
 
-    public function updateReturnRequest($returnId) {}
+    /*----------READ----------*/
+    public function listReturnsRequests()
+    {
+        try {
+            $script = "SELECT * FROM returns WHERE status = 1 ORDER BY requestDate ASC";
+            $stmt = $this->connection->prepare($script);
+            $stmt->execute();
+            $returns = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $return = new Returns();
+                $return->setReturnId($row['returnId']);
+                $return->setRequestDate($row['requestDate']);
+                $return->setPurchaseDate($row['purchaseDate']);
+                $return->setProductStatus($row['productStatus']);
+                $return->setProductCode($row['productCode']);
+                $return->setInvoiceCode($row['invoiceCode']);
+                $return->setDescription($row['description']);
+                $return->setRequestStatus($row['requestStatus']);
+                $returns[] = $return;
+            }
+            return $returns;
+        } catch (PDOException $e) {
+            error_log("Fail searchReturnRequestById: " . $e->getMessage());
+            return [];
+        }
+    }
 
-    public function deleteReturnRequest($returnId) {}
+    public function searchReturnsRequestById($returnId)
+    {
+        try {
+            /* $script = "SELECT * FROM returns WHERE returnId = :userId"; */
+            $script = "SELECT * FROM returns WHERE status = 1 ORDER BY requestDate ASC";
+            $stmt = $this->connection->prepare($script);
+            /* $stmt->bindParam(":userId", $returnId, PDO::PARAM_INT); */
+            $stmt->execute();
+            $returns = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $return = new Returns();
+                $return->setReturnId($row['returnId']);
+                $return->setRequestDate($row['requestDate']);
+                $return->setPurchaseDate($row['purchaseDate']);
+                $return->setProductStatus($row['productStatus']);
+                $return->setProductCode($row['productCode']);
+                $return->setInvoiceCode($row['invoiceCode']);
+                $return->setDescription($row['description']);
+                $return->setRequestStatus($row['requestStatus']);
+                $returns[] = $return;
+            }
+            return $returns;
+        } catch (PDOException $e) {
+            error_log("Fail searchReturnRequestById: " . $e->getMessage());
+            return [];
+        }
+    }
 
-    public function listReturnsRequests() {}
+    public function searchReturnRequestById($returnId)
+    {
+        try {
+            $script = "SELECT * FROM returns WHERE returnId = :returnId";
+            $return = new Returns();
+            $stmt = $this->connection->prepare($script);
+            $stmt->bindParam(":returnId", $returnId, PDO::PARAM_INT);
+            $stmt->execute();
 
-    public function searchReturnRequestById($returnId) {}
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $return->setReturnId($row['returnId']);
+                $return->setUserId($row['userId']);
+                $return->setRequestDate($row['requestDate']);
+                $return->setPurchaseDate($row['purchaseDate']);
+                $return->setProductStatus($row['productStatus']);
+                $return->setProductCode($row['productCode']);
+                $return->setInvoiceCode($row['invoiceCode']);
+                $return->setDescription($row['description']);
+                $return->setRequestStatus($row['requestStatus']);
+            }
+            return $return;
+        } catch (PDOException $e) {
+            error_log("Fail searchReturnRequestById: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /*----------UPDATE----------*/
+    public function updateReturnRequest($returnId, $return)
+    {
+        try {
+            $script = "UPDATE returns SET purchaseDate = :purchaseDate, productStatus = :productStatus, productCode = :productCode, invoiceCode = :invoiceCode, description = :description WHERE returnId = :returnId";
+            $stmt = $this->connection->prepare($script);
+            $stmt->bindParam(":purchaseDate", $return->getPurchaseDate(), PDO::PARAM_STR);
+            $stmt->bindParam(":productStatus", $return->getProductStatus(), PDO::PARAM_STR);
+            $stmt->bindParam(":productCode", $return->getProductCode(), PDO::PARAM_STR);
+            $stmt->bindParam(":invoiceCode", $return->getInvoiceCode(), PDO::PARAM_STR);
+            $stmt->bindParam(":description", $return->getDescription(), PDO::PARAM_STR);
+            $stmt->bindParam(":returnId", $returnId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log(("Fail update request" . $e));
+            return false;
+        }
+    }
+
+    public function updateRequestStatus($returnId, $requestStatus)
+    {
+        try {
+            $script = "UPDATE returns SET requestStatus = :requestStatus WHERE returnId = :returnId";
+            $stmt = $this->connection->prepare($script);
+            $stmt->bindParam(":requestStatus", $requestStatus, PDO::PARAM_INT);
+            $stmt->bindParam(":returnId", $returnId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /*----------DELETE----------*/
+    public function deleteReturnRequest($returnId)
+    {
+        try {
+            $script = "UPDATE returns SET status = 0 WHERE returnId = :returnId";
+            $stmt = $this->connection->prepare($script);
+            $stmt->bindParam(":returnId", $returnId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException) {
+            return false;
+        }
+    }
 }
