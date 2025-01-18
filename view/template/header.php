@@ -9,9 +9,9 @@ if (!empty($_SESSION['userLogged'])) {
 } else {
 
   //Logica para redirigir a la pagina de login si no existe el usuario logeado
-    //HEADER('Location: view/login.php');
+  //HEADER('Location: view/login.php');
 
-  
+
   // Rol para pruebas
   $rol = 1;
 }
@@ -26,12 +26,13 @@ if (!empty($_SESSION['userLogged'])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResolveIT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 
 <header>
   <a href="/" class="logo-div" style="color: #000;">
-    <img class="logo-img" src="src/logo.png" alt="Logo empresa" width="50" height="50">
+    <img class="logo-img" src="assets/img/logo.png" alt="Logo empresa" width="50" height="50">
     <h1 id="logo-name">ResolveIT</h1>
   </a>
 
@@ -40,7 +41,7 @@ if (!empty($_SESSION['userLogged'])) {
   if ($rol == 1) {
   ?>
     <nav class="nav-links">
-      <a href="#">Devolucion</a>
+      <a href="index.php?c=returns&f=index">Devolucion</a>
       <a href="#">Garantia</a>
       <a href="#">FAQ</a>
       <a href="#">Contactar</a>
@@ -54,7 +55,7 @@ if (!empty($_SESSION['userLogged'])) {
   if ($rol == 2) {
   ?>
     <nav class="nav-links">
-      <a href="#">Devoluciones</a>
+      <a href="index.php?c=returns&f=list_view">Devoluciones</a>
       <a href="#">Garantias</a>
     </nav>
   <?php
@@ -74,7 +75,5 @@ if (!empty($_SESSION['userLogged'])) {
   ?>
 
 
-  <div id="header-right">
-    <a href="#">Cerrar Sesión</a>
-  </div>
+    <a class="nav-button" href="#">Cerrar Sesión</a>
 </header>
