@@ -1,6 +1,6 @@
 <?php require_once HEADER ?>
 
-<body>
+<main>
     <h1><?= $title ?></h1>
     <?php if (isset($_GET['message'])): ?>
         <h2>
@@ -79,7 +79,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-</body>
+</main>
 <script src="assets/js/returnScript.js"></script>
 
 

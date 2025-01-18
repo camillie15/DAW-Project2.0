@@ -1,6 +1,6 @@
 <?php require_once HEADER ?>
 
-<body>
+<main>
     <?php if (isset($_GET['message'])): ?>
         <h2>
             <?= $_GET['message'] ?>
@@ -36,7 +36,7 @@
         <p>...</p>
         <button>Insertar test</button>
     </form>
-</body>
+</main>
 
 <script src="assets/js/returnScript.js"></script>
 

@@ -1,6 +1,6 @@
 <?php require_once HEADER ?>
 
-<body>
+<main>
     <h1>
         VISTA ESTATICA PARA LAS DEVOLUCIONES
     </h1>
@@ -20,7 +20,7 @@
             <li>El producto debe tener la factura</li>
         </ul>
     </section>
-</body>
+</main>
 
 <script src="assets/js/returnScript.js"></script>
 
