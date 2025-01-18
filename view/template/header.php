@@ -31,7 +31,7 @@ if (!empty($_SESSION['userLogged'])) {
 
 <header>
   <a href="/" class="logo-div" style="color: #000;">
-    <img class="logo-img" src="src/logo.png" alt="Logo empresa" width="50" height="50">
+    <!-- <img class="logo-img" src="src/logo.png" alt="Logo empresa" width="50" height="50"> -->
     <h1 id="logo-name">ResolveIT</h1>
   </a>
 
