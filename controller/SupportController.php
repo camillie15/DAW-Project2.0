@@ -16,11 +16,13 @@ class SupportController{
         $this->supportResponseDAO = new SupportResponseDAO();
     }
 
+
     private function checkRole($rol) {
         if (!isset($_SESSION['rol']) || $_SESSION['rol'] != $rol) {
             //Devolver al home
             exit();
         }
+        
     }
 
     public function showRequests(){
@@ -54,7 +56,6 @@ class SupportController{
         $this->checkRole(1);
         $requestId = htmlentities($_GET['requestId']);
         $supportRequest = $this->supportRequestDAO->getSupportRequestById($requestId);
-        var_dump($supportRequest);
         require_once VSUPPORT . 'editRequest.php';
     }
 
@@ -84,9 +85,9 @@ class SupportController{
     
             echo "
                 <div>
-                    <label>Fecha de Respuesta:</label>
+                    <label><strong>Fecha de Respuesta:</strong></label>
                     <p>{$responseDate}</p>
-                    <label>Respuesta:</label>
+                    <label><strong>Respuesta:</strong></label>
                     <p>{$responseText}</p>
                 </div>
             ";

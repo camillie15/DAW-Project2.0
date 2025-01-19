@@ -22,7 +22,15 @@ $languages = [
             <form action="index.php?c=support&f=createRequest" method="POST" id="form-contact" onsubmit="validateLanguage()">
                 <h3>Envía tu solicitud y el equipo de soporte te dará una respuesta</h3>
                 <div>
-                    <label for="language">Idioma: </label>
+                    <label class="label-bold" for="subject">Asunto: </label>
+                    <input type="text" id="subject" name="subject" required placeholder="Ingrese el asunto">
+                </div>
+                <div>
+                    <label class="label-bold" for="description">Descripción: </label>
+                    <textarea name="description" id="description" required placeholder="Ingrese la descripción de la solicitud"></textarea>
+                </div>
+                <div>
+                    <label class="label-bold" for="language">Idioma: </label>
                     <select name="language" id="language">
                         <option id="info-option-language" value="info" selected disabled>Seleccione el idioma...</option>
                         <?php foreach ($languages as $language): ?>
@@ -33,23 +41,27 @@ $languages = [
                     </select>
                 </div>
                 <div>
-                    <label for="priority">Prioridad: </label>
-                    <input type="radio" id="low" name="priority" value="Baja" required>
-                    <label for="low">Baja</label>
-                    <input type="radio" id="medium" name="priority" value="Media" required>
-                    <label for="medium">Media</label>
-                    <input type="radio" id="high" name="priority" value="Alta" required>
-                    <label for="high">Alta</label>
+                    <label class="label-bold" for="priority">Prioridad: </label>
+                    <div class="div-radio-group">
+                        <div class="radio-group">
+                            <input type="radio" id="low" name="priority" value="Baja" required>
+                            <label style="font-weight=none;" for="low">Baja</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="medium" name="priority" value="Media" required>
+                            <label for="medium">Media</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="high" name="priority" value="Alta" required>
+                            <label for="high">Alta</label>
+                        </div>
+                    </div>
                 </div>
                 <div>
-                    <label for="subject">Asunto: </label>
-                    <input type="text" id="subject" name="subject" required placeholder="Ingrese el asunto">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">Acepto los términos y condiciones</label>
                 </div>
-                <div>
-                    <label for="description">Descripción: </label>
-                    <textarea name="description" id="description" required placeholder="Ingrese la descripción de la solicitud"></textarea>
-                </div>
-                <div>
+                <div class="div-buttons">
                     <input type="submit" value="Enviar">
                     <input type="reset" value="Cancelar" onclick="window.location.href='index.php?c=support&f=showRequests'">
                 </div>

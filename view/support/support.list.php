@@ -17,7 +17,7 @@ if (!isset($_SESSION)) {
         <div id="supportHeader">
             <h1>Lista de Solicitudes de Soporte</h1>
             <?php if ($_SESSION['rol'] == 1): ?>
-                <a href="index.php?c=support&f=newRequest" id="btn-new-request">Nueva Solicitud</a>
+                <a href="index.php?c=support&f=newRequest" class="btn">Nueva Solicitud</a>
             <?php endif; ?>
         </div>
         <div>
@@ -95,32 +95,29 @@ if (!isset($_SESSION)) {
             </table>
         </div>
             <div id="confirmDeleteModal" style="display: none;">
-            <div>
+            <div id="confirmDeleteContent">
                 <div>
                     <div>
-                        <h5>Confirmar Eliminación</h5>
+                        <h4>Confirmar Eliminación</h4>
                     </div>
                     <label>¿Estás seguro de que deseas eliminar esta solicitud de soporte?</label>
-                    <div>
-                        <button type="button">Cancelar</button>
-                        <a href="" id="confirmDeleteButton">Eliminar</a>
+                    <div class="div-buttons-modal">
+                        <button class="btn"  type="button">Cancelar</button>
+                        <a class="btn" href="" id="confirmDeleteButton">Eliminar</a>
                     </div>
                 </div>
             </div>
         </div>
         <div id="responseModal" style="display: none;">
-            <div>
-                <div>
-                    <h5 id="modalTitle">Detalle de la respuesta</h5>
-                    <div id="responseContent">
-
-                    </div>
-                    <div>
-                        <button type="button" id="closeModalButton">Cerrar</button>
-                    </div>
+            <div id="responseModalContent">
+                <h4 id="modalTitle">Detalle de la respuesta</h4>
+                <div id="responseContent"></div>
+                <div class="div-buttons-modal">
+                    <button class="btn" type="button" id="closeModalButton">Cerrar</button>
                 </div>
             </div>
         </div>
+
     </main>
     <script src="assets/js/support.js"></script>
 
