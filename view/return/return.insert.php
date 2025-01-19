@@ -42,4 +42,5 @@
 <script src="assets/js/returnScript.js"></script>
 
 
-<?php require_once FOOTER ?>s
+<?php require_once FOOTER ?>
+

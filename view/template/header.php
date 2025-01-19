@@ -74,7 +74,5 @@ if (!empty($_SESSION['userLogged'])) {
   <?php
   }
   ?>
-
-
     <a class="nav-button" href="#">Cerrar Sesión</a>
 </header>
