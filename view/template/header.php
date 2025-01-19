@@ -27,11 +27,12 @@ if (!empty($_SESSION['userLogged'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResolveIT</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/returnStyle.css">
 </head>
 
 
 <header>
-  <a href="/" class="logo-div" style="color: #000;">
+  <a href="index.php" class="logo-div" style="color: #000;">
     <img class="logo-img" src="assets/img/logo.png" alt="Logo empresa" width="50" height="50">
     <h1 id="logo-name">ResolveIT</h1>
   </a>
@@ -55,8 +56,8 @@ if (!empty($_SESSION['userLogged'])) {
   if ($rol == 2) {
   ?>
     <nav class="nav-links">
-      <a href="index.php?c=returns&f=list_view">Devoluciones</a>
-      <a href="#">Garantias</a>
+      <a href="index.php?c=returns&f=list_view">Peticiones de Devolucion</a>
+      <a href="#">Peticiones de Garantia</a>
     </nav>
   <?php
   }
