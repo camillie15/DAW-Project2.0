@@ -5,58 +5,51 @@ require_once 'repository/ReturnsDAO.php';
 class ReturnsController
 {
 
-    private $model;
+    private $returnRepository;
 
     public function __construct()
     {
-        $this->model = new ReturnsDAO();
+        $this->returnRepository = new ReturnsDAO();
     }
 
     /**
      * Static page of returns
      */
+    //Client
     public function index()
     {
+        $this->returnToHome(1);
         require_once 'view/statics/return.static.php';
     }
 
-    /**
-     * Method to redirect a page with a message
-     */
-    public function redirectWithMessage($flag, $message, $path)
-    {
-        $flag ? header("location: $path&message=$message") : header("location: $path&message=$message");
-    }
 
     /**
      * Method to insert a new return, page and logic insert
      */
+    //Client
     public function insert_view()
     {
+        $this->returnToHome(1);
         require_once 'view/return/return.insert.php';
     }
 
+    //Client
     public function insert_new_return()
     {
+        $this->returnToHome(1);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
-                $currentDate = new DateTime('NOW');
-                $return = new Returns();
                 //InsertId of user Logged
-                /* $return->userId = $_SESSION['userLogged']->userId; */
+                /* $userId = $_SESSION['userLogged']->userId; */
 
                 /* TestIdUser */
-                $return->setUserId(10);
-                $return->setRequestDate($currentDate->format('Y-m-d H:i:s'));
-                $return->setPurchaseDate(htmlentities($_POST['purchase_date']));
-                $return->setProductStatus(htmlentities($_POST['product_status']));
-                $return->setProductCode(htmlentities($_POST['product_code']));
-                $return->setInvoiceCode(htmlentities($_POST['invoice_code']));
-                $return->setDescription(htmlentities($_POST['description']));
-                $return->setRequestStatus(0);
-                $return->setStatus(1);
-                $result = $this->model->insertReturnRequest($return);
-
+                $userId = 10;
+                $currentDate = new DateTime('NOW');
+                
+                $return = new Returns();
+                $return = $this->createReturnObject($currentDate, null, $userId);
+                
+                $result = $this->returnRepository->insertReturnRequest($return);
                 if ($result) {
                     $this->redirectWithMessage(true, "Solicitud enviada con exito", "index.php?c=returns&f=index");
                 } else {
@@ -71,48 +64,51 @@ class ReturnsController
     /**
      * Method to view list of reuest returns clients, page and logic view list
      */
+    //Client
     public function list_client_view()
     {
+        $this->returnToHome(1);
         $title = "Historial de peticiones de devolucion";
         $returns = [];
-        $returns = $this->model->searchReturnsRequestById(0);
+        $returns = $this->returnRepository->searchReturnsRequestById(0);
         require_once 'view/return/return.list.php';
     }
 
     /**
      * Method to view all list of request, page and logic view list
      */
+    //Employee 1
     public function list_view()
     {
+        $this->returnToHome(2);
         $title = "Gestion peticiones de devolucion";
-        $returns = $this->model->listReturnsRequests();
+        $returns = $this->returnRepository->listReturnsRequests();
         require_once 'view/return/return.list.php';
     }
 
     /**
      * Method to update a return, page and logic update
      */
-
+    //Client
     public function update_view()
     {
+        $this->returnToHome(1);
         $returnId = $_GET['id'];
-        $return = $this->model->searchReturnRequestById($returnId);
+        $return = $this->returnRepository->searchReturnRequestById($returnId);
         require_once 'view/return/return.update.php';
     }
 
+    //Client
     public function update_return()
     {
+        $this->returnToHome(1);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 $id = $_GET['id'];
                 $return = new Returns();
-                $return->setReturnId($_GET['id']);
-                $return->setPurchaseDate(htmlentities($_POST['purchase_date']));
-                $return->setProductStatus(htmlentities($_POST['product_status']));
-                $return->setProductCode(htmlentities($_POST['product_code']));
-                $return->setInvoiceCode(htmlentities($_POST['invoice_code']));
-                $return->setDescription(htmlentities($_POST['description']));
-                $result = $this->model->updateReturnRequest($id, $return);
+
+                $return = $this->createReturnObject(null, $id, null);
+                $result = $this->returnRepository->updateReturnRequest($id, $return);
                 if ($result) {
                     $this->redirectWithMessage(true, "Solicitud actualizada con exito", "index.php?c=returns&f=list_client_view");
                 } else {
@@ -128,10 +124,12 @@ class ReturnsController
      * Method to delete a return request
      */
 
+    //Client
     public function delete_return()
     {
+        $this->returnToHome(1);
         $returnId = $_GET['id'];
-        $result = $this->model->deleteReturnRequest($returnId);
+        $result = $this->returnRepository->deleteReturnRequest($returnId);
         if ($result) {
             $this->redirectWithMessage(true, "Solicitud eliminada con exito", "index.php?c=returns&f=list_client_view");
         } else {
@@ -142,16 +140,64 @@ class ReturnsController
     /**
      * Method to accept o deny return request client
      */
-
+    //Employee 1
     public function reply_request()
     {
-        $returnId = $_GET['id'];
-        $reply = $_GET['r'];
-        $result = $this->model->updateRequestStatus($returnId, $reply);
+        $this->returnToHome(2);
+        if (isset($_GET['id']) && isset($_GET['r'])) {
+            $returnId = $_GET['id'];
+            $reply = $_GET['r'];
+            $result = $this->returnRepository->updateRequestStatus($returnId, $reply);
+        } else {
+            $result = false;
+        }
+
         if ($result) {
             $this->redirectWithMessage(true, "Solicitud actualizada con exito", "index.php?c=returns&f=list_view");
         } else {
             $this->redirectWithMessage(false, "Ha ocurrido un error al intentar actualizar tu solicitud", "index.php?c=returns&f=list_view");
         }
+    }
+
+    /*------------------ Special Methods -----------------------*/
+    /**
+     * Method to compare, rol of users and redirect
+     * $rol = 1 -> rol of client
+     * $rol = 1 -> rol of manage employee of petitions 
+     */
+    private function returnToHome($rol)
+    {
+        $rolUser = 1; //Here will go userRol of session created
+        if ($rol !== $rolUser) {
+            header("location: index.php");
+            exit();
+        }
+    }
+
+    /**
+     * Method to redirect a page with a message
+     */
+    private function redirectWithMessage($flag, $message, $path)
+    {
+        $flag ? header("location: $path&message=$message") : header("location: $path&message=$message");
+    }
+
+    /**
+     * Method to create a new object of return, clean code
+     */
+    private function createReturnObject($currentDate, $returnId, $userId)
+    {
+        $return = new Returns();
+        $return->setReturnId($userId);
+        $return->setUserId($userId);
+        $return->setRequestDate($currentDate !=null ? $currentDate->format('Y-m-d H:i:s') : null);
+        $return->setPurchaseDate(htmlentities($_POST['purchase_date']));
+        $return->setProductStatus(htmlentities($_POST['product_status']));
+        $return->setProductCode(htmlentities($_POST['product_code']));
+        $return->setInvoiceCode(htmlentities($_POST['invoice_code']));
+        $return->setDescription(htmlentities($_POST['description']));
+        $return->setRequestStatus(0);
+        $return->setStatus(1);
+        return $return;
     }
 }
