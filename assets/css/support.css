@@ -1,1 +1,93 @@
-/* */
+main {
+    width: 90%;
+    margin: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    & i{
+        color: #000000;
+    }
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+th {
+    background-color: #0066ff;
+    color: #ffffff;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+td:nth-child(3), th:nth-child(3) {
+    width: 45%;
+}
+
+td:nth-child(1), td:nth-child(2), td:nth-child(4), td:nth-child(5), 
+td:nth-child(6), td:nth-child(7), td:nth-child(8) {
+    width: auto;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-new-request{
+    box-sizing: border-box;
+    border: 2px solid #0066ff;
+    padding: 8px 8px;
+    background-color: transparent;
+    color: #0066ff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#supportHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-direction: column;
+
+    & a{
+        width: fit-content;
+        align-self: flex-end;
+    }
+}
+
+.div-form{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    & div{
+        width: 100%;
+        display: flex;
+        background-color: aquamarine;
+
+        & input, select, textArea {
+            background-color: aqua;
+            width: auto;
+        }
+    }
+}

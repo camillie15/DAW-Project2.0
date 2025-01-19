@@ -42,7 +42,7 @@ echo "No hay rol";
       <a href="index.php?c=returns&f=index">Devolucion</a>
       <a href="#">Garantia</a>
       <a href="#">FAQ</a>
-      <a href="index.php?c=support&f=showUserRequests">Contactar</a>
+      <a href="index.php?c=support&f=showRequests">Contactar</a>
     </nav>
   <?php
   }
@@ -66,7 +66,7 @@ echo "No hay rol";
   ?>
     <nav class="nav-links">
       <a href="#">FAQ</a>
-      <a href="#">Contactar</a>
+      <a href="index.php?c=support&f=showRequests">Contactar</a>
     </nav>
   <?php
   }

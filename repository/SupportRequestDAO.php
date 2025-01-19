@@ -65,11 +65,11 @@ class SupportRequestDAO{
             $sql = "update supportrequests set subject = :subject, description = :description, 
             priority = :priority, language = :language WHERE requestId = :requestId";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindValue(":subject", $supportRequest->getSubject(), PDO::PARAM_STR);
-            $stmt->bindValue(":description", $supportRequest->getDescription(), PDO::PARAM_STR);
-            $stmt->bindValue(":priority", $supportRequest->getPriority(), PDO::PARAM_STR);
-            $stmt->bindValue(":language", $supportRequest->getLanguage(), PDO::PARAM_STR);
-            $stmt->bindValue(":requestId", $supportRequest->getRequestId(), PDO::PARAM_INT);
+            $stmt->bindValue(":subject", $supportRequest->subject, PDO::PARAM_STR);
+            $stmt->bindValue(":description", $supportRequest->description, PDO::PARAM_STR);
+            $stmt->bindValue(":priority", $supportRequest->priority, PDO::PARAM_STR);
+            $stmt->bindValue(":language", $supportRequest->language, PDO::PARAM_STR);
+            $stmt->bindValue(":requestId", $supportRequest->requestId, PDO::PARAM_INT);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
