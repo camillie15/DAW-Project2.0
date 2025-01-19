@@ -3,17 +3,15 @@ if (!isset($_SESSION)) session_start();
 
 //Logica para asignar el rol a una variable para utilizar para el rol
 
-if (!empty($_SESSION['userLogged'])) {
-  $user = $_SESSION['userLogged'];
-  $rol = $user->getRol();
+if (!empty($_SESSION['rol'])) {
+  $rol = $_SESSION['rol'];
 } else {
-
+echo "No hay rol";
   //Logica para redirigir a la pagina de login si no existe el usuario logeado
     //HEADER('Location: view/login.php');
 
   
   // Rol para pruebas
-  $rol = 1;
 }
 
 
@@ -31,7 +29,7 @@ if (!empty($_SESSION['userLogged'])) {
 
 <header>
   <a href="/" class="logo-div" style="color: #000;">
-    <img class="logo-img" src="src/logo.png" alt="Logo empresa" width="50" height="50">
+    <img class="logo-img" src="assets/img/Verified.png" alt="Logo empresa" width="50" height="50">
     <h1 id="logo-name">ResolveIT</h1>
   </a>
 
@@ -43,7 +41,7 @@ if (!empty($_SESSION['userLogged'])) {
       <a href="#">Devolucion</a>
       <a href="#">Garantia</a>
       <a href="#">FAQ</a>
-      <a href="#">Contactar</a>
+      <a href="index.php?c=support&f=showUserRequests">Contactar</a>
     </nav>
   <?php
   }

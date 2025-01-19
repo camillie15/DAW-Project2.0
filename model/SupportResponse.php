@@ -1,8 +1,8 @@
 <?php
 
-class SupportRequest{
+class SupportResponse{
 
-    private $requestId, $userId, $requestDate, $language, $subject, $description, $priority, $requestStatus, $status;
+    private $responseId, $requestId, $responseDate, $userId, $response;
 
     function __construct(){
     }
