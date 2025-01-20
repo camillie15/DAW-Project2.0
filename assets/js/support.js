@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const requestId = this.parentElement.getAttribute("data-request-id");
   
         if (requestId) {
-          confirmDeleteButton.href = `index.php?c=support&f=deleteRequest&requestId=${requestId}`;
+          confirmDeleteButton.href = `index.php?c=support&f=delete_request&requestId=${requestId}`;
+
           confirmDeleteModal.style.display = "block";
         } else {
           console.error("No se pudo obtener el requestId.");

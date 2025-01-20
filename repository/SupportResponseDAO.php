@@ -12,11 +12,11 @@ class SupportResponseDAO{
 
     public function insertSupportResponse($supportResponse) {
         try {
-            $sqlCheck = "select count(*) FROM supportrequests WHERE requestId = :requestId";
-            $stmtCheck = $this->connection->prepare($sqlCheck);
-            $stmtCheck->bindValue(":requestId", $supportResponse->requestId, PDO::PARAM_INT);
-            $stmtCheck->execute();
-            if ($stmtCheck->fetchColumn() == 0) {
+            $sqlCheckRequest = "select count(*) FROM supportrequests WHERE requestId = :requestId";
+            $stmtCheckRequest = $this->connection->prepare($sqlCheckRequest);
+            $stmtCheckRequest->bindValue(":requestId", $supportResponse->requestId, PDO::PARAM_INT);
+            $stmtCheckRequest->execute();
+            if ($stmtCheckRequest->fetchColumn() == 0) {
                 throw new PDOException("El requestId no existe en supportrequests.");
             }
     
@@ -26,6 +26,29 @@ class SupportResponseDAO{
             $stmt->bindValue(":requestId", $supportResponse->requestId, PDO::PARAM_INT);
             $stmt->bindValue(":responseDate", $supportResponse->responseDate, PDO::PARAM_STR);
             $stmt->bindValue(":userId", $supportResponse->userId, PDO::PARAM_INT);
+            $stmt->bindValue(":response", $supportResponse->response, PDO::PARAM_STR);
+            
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en la consulta: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function updateSupportResponse($supportResponse){
+        try {
+            $sqlCheckRequest = "select count(*) FROM supportrequests WHERE requestId = :requestId";
+            $stmtCheckRequest = $this->connection->prepare($sqlCheckRequest);
+            $stmtCheckRequest->bindValue(":requestId", $supportResponse->requestId, PDO::PARAM_INT);
+            $stmtCheckRequest->execute();
+            if ($stmtCheckRequest->fetchColumn() == 0) {
+                throw new PDOException("El requestId no existe en supportrequests.");
+            }
+    
+            $sql = "update supportresponses set response = :response WHERE responseId = :responseId";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(":responseId", $supportResponse->responseId, PDO::PARAM_INT);
             $stmt->bindValue(":response", $supportResponse->response, PDO::PARAM_STR);
             
             $stmt->execute();

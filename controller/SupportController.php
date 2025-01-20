@@ -19,20 +19,20 @@ class SupportController{
 
     private function checkRole($rol) {
         if (!isset($_SESSION['rol']) || $_SESSION['rol'] != $rol) {
-            //Devolver al home
+            Header("Location: index.php");
             exit();
         }
         
     }
 
-    public function showRequests(){
-        error_log($_SESSION['rol']);
+    public function show_requests(){
+        $_SESSION['rol'] = 1;
         if($_SESSION['rol'] == 1){
-            $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['user']);
+            $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['rol']);
         }else if($_SESSION['rol'] == 3){
             $supportRequests = $this->supportResponseDAO->getSupportRequests();
         }else{
-            //Devolver al home
+            Header("Location: index.php");
             exit();
         }
         require_once VSUPPORT . 'list.php';
@@ -40,38 +40,38 @@ class SupportController{
 
     //REQUESTS
 
-    public function newRequest(){
+    public function form_create_request(){
         $this->checkRole(1);
         require_once VSUPPORT . 'newRequest.php';
     }
 
-    public function createRequest(){
+    public function create_request(){
         $this->checkRole(1);
         $supportRequest = $this->setDataRequest();
         $this->supportRequestDAO->insertSupportRequest($supportRequest);
-        header("Location: index.php?c=support&f=showRequests");
+        header("Location: index.php?c=support&f=show_requests");
     }
 
-    public function editRequest(){
+    public function form_update_request(){
         $this->checkRole(1);
         $requestId = htmlentities($_GET['requestId']);
         $supportRequest = $this->supportRequestDAO->getSupportRequestById($requestId);
         require_once VSUPPORT . 'editRequest.php';
     }
 
-    public function updateRequest(){
+    public function update_request(){
         $this->checkRole(1);
         $supportRequest = $this->setDataRequest();
         $supportRequest->requestId = htmlentities($_POST['requestId']);
         $this->supportRequestDAO->updateSupportRequest($supportRequest);
-        header("Location: index.php?c=support&f=showRequests");
+        header("Location: index.php?c=support&f=show_requests");
     }
 
-    public function deleteRequest(){
+    public function delete_request(){
         $this->checkRole(1);
         $requestId = htmlentities($_GET['requestId']);
         $this->supportRequestDAO->logicDeleteSupportRequest($requestId);
-        header("Location: index.php?c=support&f=showRequests");
+        header("Location: index.php?c=support&f=show_requests");
     }
 
     public function showResponseByRequestId() {
@@ -100,8 +100,8 @@ class SupportController{
     
     public function setDataRequest() {
         $supportRequest = new SupportRequest();
-        $supportRequest->userId = $_SESSION['user'];
-        //$supportRequest->userId = 1;
+        //$supportRequest->userId = $_SESSION['user'];
+        $supportRequest->userId = 1;
         $supportRequest->language = htmlentities($_POST['language']);
         $supportRequest->subject = htmlentities($_POST['subject']);
         $supportRequest->description = htmlentities($_POST['description']);
@@ -114,27 +114,39 @@ class SupportController{
 
     // RESPONSES
 
-    public function newResponse(){
+    public function form_response(){
         $this->checkRole(3);
         $requestId = htmlentities($_GET['requestId']);
-        $supportRequest
-         = $this->supportRequestDAO->getSupportRequestById($requestId);
-        require_once VSUPPORT . 'newResponse.php';
+        $supportRequest = $this->supportRequestDAO->getSupportRequestById($requestId);
+        $supportResponse = $this->supportResponseDAO->getResponseByRequestId($requestId);
+        if(!empty($supportResponse)){
+            require_once VSUPPORT . "editResponse.php";
+        }else{
+            require_once VSUPPORT . 'newResponse.php';
+        }
     }
 
-    public function createResponse(){
+    public function create_response(){
         $this->checkRole(3);
         $supportResponse = $this->setDataResponse();
         $this->supportResponseDAO->insertSupportResponse($supportResponse);
         $this->supportRequestDAO->updateRequestStatus($supportResponse->requestId);
-        header("Location: index.php?c=support&f=showRequests");
+        header("Location: index.php?c=support&f=show_requests");
+    }
+
+    public function update_response(){
+        $this->checkRole(3);
+        $supportResponse = $this->setDataResponse();
+        $supportResponse->responseId = htmlentities($_POST['responseId']);
+        $this->supportResponseDAO->updateSupportResponse($supportResponse);
+        header("Location: index.php?c=support&f=show_requests");
     }
 
     public function setDataResponse() {
         $supportResponse = new SupportResponse();
         $supportResponse->requestId = htmlentities($_POST['requestId']);
-        $supportResponse->userId = $_SESSION['user'];
-        //$supportResponse->userId = 1;
+        //$supportResponse->userId = $_SESSION['user'];
+        $supportResponse->userId = 1;
         $supportResponse->responseDate = (new DateTime('NOW'))->format('Y-m-d H:i:s');
         $supportResponse->response = htmlentities($_POST['response']);
         return $supportResponse;

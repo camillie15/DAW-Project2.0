@@ -17,14 +17,18 @@ if (!isset($_SESSION)) {
         <div id="supportHeader">
             <h1>Lista de Solicitudes de Soporte</h1>
             <?php if ($_SESSION['rol'] == 1): ?>
-                <a href="index.php?c=support&f=newRequest" class="btn">Nueva Solicitud</a>
+                <a href="index.php?c=support&f=form_create_request" class="btn">Nueva Solicitud</a>
             <?php endif; ?>
         </div>
         <div>
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <?php if ($_SESSION['rol'] == 3): ?>
+                            <th>Usuario</th>
+                        <?php else: ?>
+                            <th>Id Solicitud</th>
+                        <?php endif; ?>
                         <th>Asunto</th>
                         <th>Descripción</th>
                         <th>Prioridad</th>
@@ -59,7 +63,7 @@ if (!isset($_SESSION)) {
                                         <td><?php echo ($request['requestStatus'] == 0) ? 'Pendiente' : 'Resuelta'; ?></td>
                                         <td>
                                             <div class="action-buttons">
-                                                <a href="index.php?c=support&f=editRequest&requestId=<?php echo $request['requestId']; ?>"> 
+                                                <a href="index.php?c=support&f=form_update_request&requestId=<?php echo $request['requestId']; ?>"> 
                                                     <i class="bi bi-pencil-square"></i> 
                                                 </a> 
                                                 <a href="#" data-request-id="<?php echo $request['requestId']; ?>"> 
@@ -71,16 +75,23 @@ if (!isset($_SESSION)) {
                                             </div>
                                         </td>
                                     <?php else: ?>
-                                        <td><?php echo $request['requestId']; ?></td>
+                                        <td><?php echo $request['userId']; ?></td>
                                         <td><?php echo html_entity_decode($request['subject'], ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo html_entity_decode($request['description'], ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo $request['priority']; ?></td>
                                         <td><?php echo (new DateTime($request['requestDate']))->format('d-m-Y H:i'); ?></td>
                                         <td><?php echo ($request['requestStatus'] == 0) ? 'Pendiente' : 'Resuelta'; ?></td>
                                         <td>
-                                            <a href="index.php?c=support&f=newResponse&requestId=<?php echo $request['requestId']; ?>">
-                                                Responder
-                                            </a>
+                                            <?php if($request['requestStatus'] == 0): ?>
+                                                <a href="index.php?c=support&f=form_response&requestId=<?php echo $request['requestId']; ?>">
+                                                    Responder
+                                                </a>
+                                            <?php else: ?>
+                                                <a href="index.php?c=support&f=form_response&requestId=<?php echo $request['requestId']; ?>">
+                                                    Actualizar respuesta
+                                                </a>
+                                            <?php endif; ?>
+                                            
                                         </td>
                                     <?php endif; ?>
                                 </td>

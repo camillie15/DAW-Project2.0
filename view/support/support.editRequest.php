@@ -28,17 +28,17 @@ $languages = [
 <body>
 <main>
     <div class="div-form">
-            <form action="index.php?c=support&f=updateRequest" method="POST" id="form-contact" onsubmit="validateLanguage()">
+            <form action="index.php?c=support&f=update_request" method="POST" id="form-contact" onsubmit="validateLanguage()">
                 <h3>Actualiza los datos de tu solicitud</h3>
                 <input type="hidden" name="requestId" value="<?php echo htmlspecialchars($supportRequest['requestId']); ?>">
                 
                 <div>
                     <label class="label-bold" for="subject">Asunto: </label>
-                    <input type="text" id="subject" name="subject" required value="<?php echo htmlspecialchars($supportRequest['subject']) ?>">
+                    <input type="text" id="subject" name="subject" required value="<?php echo htmlspecialchars($supportRequest['subject']) ?>" maxlength="150">
                     </div>
                 <div>
                     <label class="label-bold" for="description">Descripción: </label>
-                    <textarea name="description" id="description" required><?php echo htmlspecialchars($supportRequest['description']); ?></textarea>
+                    <textarea name="description" id="description" required maxlength="250"><?php echo htmlspecialchars($supportRequest['description']); ?></textarea>
                     </div>
                 <div>
                     <label class="label-bold" for="language">Idioma: </label>
@@ -69,7 +69,7 @@ $languages = [
                 </div>
                 <div class="div-buttons">
                     <input type="submit" value="Enviar">
-                    <input type="reset" value="Cancelar" onclick="window.location.href='index.php?c=support&f=showRequests'">
+                    <input type="reset" value="Cancelar" onclick="window.location.href='index.php?c=support&f=show_requests'">
                 </div>
             </form>
         </div>

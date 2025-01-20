@@ -19,15 +19,15 @@ $languages = [
 <body>
     <main>
         <div class="div-form">
-            <form action="index.php?c=support&f=createRequest" method="POST" id="form-contact" onsubmit="validateLanguage()">
+            <form action="index.php?c=support&f=create_request" method="POST" id="form-contact" onsubmit="validateLanguage()">
                 <h3>Envía tu solicitud y el equipo de soporte te dará una respuesta</h3>
                 <div>
                     <label class="label-bold" for="subject">Asunto: </label>
-                    <input type="text" id="subject" name="subject" required placeholder="Ingrese el asunto">
+                    <input type="text" id="subject" name="subject" required placeholder="Ingrese el asunto" maxlength="150">
                 </div>
                 <div>
                     <label class="label-bold" for="description">Descripción: </label>
-                    <textarea name="description" id="description" required placeholder="Ingrese la descripción de la solicitud"></textarea>
+                    <textarea name="description" id="description" required placeholder="Ingrese la descripción de la solicitud" maxlength="250"></textarea>
                 </div>
                 <div>
                     <label class="label-bold" for="language">Idioma: </label>
@@ -63,7 +63,7 @@ $languages = [
                 </div>
                 <div class="div-buttons">
                     <input type="submit" value="Enviar">
-                    <input type="reset" value="Cancelar" onclick="window.location.href='index.php?c=support&f=showRequests'">
+                    <input type="reset" value="Cancelar" onclick="window.location.href='index.php?c=support&f=show_requests'">
                 </div>
             </form>
         </div>

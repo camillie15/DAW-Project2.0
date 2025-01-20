@@ -3,15 +3,17 @@ if (!isset($_SESSION)) session_start();
 
 //Logica para asignar el rol a una variable para utilizar para el rol
 
-if (!empty($_SESSION['rol'])) {
-  $rol = $_SESSION['rol'];
+if (!empty($_SESSION['userLogged'])) {
+  $user = $_SESSION['userLogged'];
+  $rol = $user->getRol();
 } else {
-echo "No hay rol";
+
   //Logica para redirigir a la pagina de login si no existe el usuario logeado
   //HEADER('Location: view/login.php');
 
 
   // Rol para pruebas
+  $rol = 1;
 }
 
 
@@ -43,7 +45,7 @@ echo "No hay rol";
       <a href="index.php?c=returns&f=index">Devolucion</a>
       <a href="#">Garantia</a>
       <a href="#">FAQ</a>
-      <a href="index.php?c=support&f=showRequests">Contactar</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
     </nav>
   <?php
   }
@@ -67,7 +69,7 @@ echo "No hay rol";
   ?>
     <nav class="nav-links">
       <a href="#">FAQ</a>
-      <a href="index.php?c=support&f=showRequests">Contactar</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
     </nav>
   <?php
   }

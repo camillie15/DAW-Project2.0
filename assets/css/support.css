@@ -153,6 +153,19 @@ td:nth-child(6), td:nth-child(7), td:nth-child(8) {
         
     }
 
+    & .div-data-request{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 10px;
+
+        & h2, p{
+            margin: 0;
+            padding: 0;
+        }
+
+    }
+
 }
 
 
