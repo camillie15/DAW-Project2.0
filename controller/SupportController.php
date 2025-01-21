@@ -47,9 +47,15 @@ class SupportController{
 
     public function create_request(){
         $this->checkRole(1);
-        $supportRequest = $this->setDataRequest();
-        $this->supportRequestDAO->insertSupportRequest($supportRequest);
-        header("Location: index.php?c=support&f=show_requests");
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            try{
+                $supportRequest = $this->setDataRequest();
+                $this->supportRequestDAO->insertSupportRequest($supportRequest);
+                header("Location: index.php?c=support&f=show_requests");
+            }catch(Exception e){
+
+            }
+        }
     }
 
     public function form_update_request(){
@@ -61,10 +67,16 @@ class SupportController{
 
     public function update_request(){
         $this->checkRole(1);
-        $supportRequest = $this->setDataRequest();
-        $supportRequest->requestId = htmlentities($_POST['requestId']);
-        $this->supportRequestDAO->updateSupportRequest($supportRequest);
-        header("Location: index.php?c=support&f=show_requests");
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            try{
+                $supportRequest = $this->setDataRequest();
+                $supportRequest->requestId = htmlentities($_POST['requestId']);
+                $this->supportRequestDAO->updateSupportRequest($supportRequest);
+                header("Location: index.php?c=support&f=show_requests");
+            }catch(Exception e){
+
+            }
+        }
     }
 
     public function delete_request(){
@@ -94,7 +106,6 @@ class SupportController{
         } else {
             echo "<p>No se encontró una respuesta para esta solicitud.</p>";
         }
-    
         exit();
     }
     
@@ -128,18 +139,22 @@ class SupportController{
 
     public function create_response(){
         $this->checkRole(3);
-        $supportResponse = $this->setDataResponse();
-        $this->supportResponseDAO->insertSupportResponse($supportResponse);
-        $this->supportRequestDAO->updateRequestStatus($supportResponse->requestId);
-        header("Location: index.php?c=support&f=show_requests");
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $supportResponse = $this->setDataResponse();
+            $this->supportResponseDAO->insertSupportResponse($supportResponse);
+            $this->supportRequestDAO->updateRequestStatus($supportResponse->requestId);
+            header("Location: index.php?c=support&f=show_requests");
+        }
     }
 
     public function update_response(){
         $this->checkRole(3);
-        $supportResponse = $this->setDataResponse();
-        $supportResponse->responseId = htmlentities($_POST['responseId']);
-        $this->supportResponseDAO->updateSupportResponse($supportResponse);
-        header("Location: index.php?c=support&f=show_requests");
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $supportResponse = $this->setDataResponse();
+            $supportResponse->responseId = htmlentities($_POST['responseId']);
+            $this->supportResponseDAO->updateSupportResponse($supportResponse);
+            header("Location: index.php?c=support&f=show_requests");
+        }
     }
 
     public function setDataResponse() {
