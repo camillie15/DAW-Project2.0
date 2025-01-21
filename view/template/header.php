@@ -13,7 +13,7 @@ if (!empty($_SESSION['userLogged'])) {
 
 
   // Rol para pruebas
-  $rol = 1;
+  $rol = 3;
 }
 
 
@@ -28,6 +28,8 @@ if (!empty($_SESSION['userLogged'])) {
   <title>ResolveIT</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/returnStyle.css">
+  <link rel="stylesheet" href="assets/css/faqStyle.css">
+  <link rel="stylesheet" href="assets/css/faqEditStyle.css">
 </head>
 
 
@@ -44,7 +46,7 @@ if (!empty($_SESSION['userLogged'])) {
     <nav class="nav-links">
       <a href="index.php?c=returns&f=index">Devolucion</a>
       <a href="#">Garantia</a>
-      <a href="#">FAQ</a>
+      <a href="index.php?c=faq&f=list_client_view">FAQ</a> <!-- Enlace para ver los FAQs -->
       <a href="#">Contactar</a>
     </nav>
   <?php
@@ -68,7 +70,7 @@ if (!empty($_SESSION['userLogged'])) {
   if ($rol == 3) {
   ?>
     <nav class="nav-links">
-      <a href="#">FAQ</a>
+      <a href="index.php?c=faq&f=list_admin_view">FAQ</a> <!-- Enlace para administrar los FAQs -->
       <a href="#">Contactar</a>
     </nav>
   <?php

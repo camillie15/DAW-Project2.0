@@ -11,6 +11,7 @@ define("FOOTER", 'view/template/footer.php');
 
 // path module view returns
 define("VRETURNS", "view/return/return.");
+define("VFAQ", "view/faq/faq.");
 
 
 // conexion bb
