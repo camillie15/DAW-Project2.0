@@ -41,7 +41,7 @@ $languages = [
                 <div class="div-radio-group">
                     <div class="radio-group">
                         <input type="radio" id="low" name="priority" value="Baja" required>
-                        <label style="font-weight=none;" for="low">Baja</label>
+                        <label for="low">Baja</label>
                     </div>
                     <div class="radio-group">
                         <input type="radio" id="medium" name="priority" value="Media" required>
@@ -58,8 +58,8 @@ $languages = [
                 <label for="terms">Acepto los términos y condiciones</label>
             </div>
             <div class="div-buttons">
-                <input class="btn" type="submit" value="Enviar">
-                <input class="btn" type="reset" value="Cancelar" onclick="window.location.href='index.php?c=support&f=show_requests'">
+                <input class="btn-support" type="submit" value="Enviar">
+                <input class="btn-support" type="reset" value="Cancelar" onclick="window.location.href='index.php?c=support&f=show_requests'">
             </div>
         </form>
     </div>
