@@ -28,6 +28,8 @@ if (!empty($_SESSION['userLogged'])) {
   <title>ResolveIT</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/returnStyle.css">
+  <link rel="stylesheet" href="assets/css/support.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 
@@ -43,9 +45,9 @@ if (!empty($_SESSION['userLogged'])) {
   ?>
     <nav class="nav-links">
       <a href="index.php?c=returns&f=index">Devolucion</a>
-      <a href="#">Garantia</a>
+      <a href="index.php?c=guarantee&f=index">Garantia</a>
       <a href="#">FAQ</a>
-      <a href="#">Contactar</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
     </nav>
   <?php
   }
@@ -69,7 +71,7 @@ if (!empty($_SESSION['userLogged'])) {
   ?>
     <nav class="nav-links">
       <a href="#">FAQ</a>
-      <a href="#">Contactar</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
     </nav>
   <?php
   }
