@@ -19,7 +19,7 @@ $languages = [
 
 <?php require_once HEADER ?>
 
-<main>
+<main class="main-support">
     <div class="div-form">
         <form action="index.php?c=support&f=update_request" method="POST" id="form-contact">
             <h3>Actualiza los datos de tu solicitud</h3>

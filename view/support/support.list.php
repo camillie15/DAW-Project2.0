@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
 }
 ?>
 <?php require_once HEADER ?>
-<main>
+<main class="main-support">
     <div id="supportHeader">
         <?php if ($_SESSION['rol'] == 1): ?>
             <h1>Contáctanos</h1>
