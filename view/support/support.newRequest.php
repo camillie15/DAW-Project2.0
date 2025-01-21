@@ -10,7 +10,7 @@ $languages = [
 ?>
 <?php require_once HEADER ?>
 
-<main>
+<main class="main-support">
     <div class="div-form">
         <form action="index.php?c=support&f=create_request" method="POST" id="form-contact" onsubmit="validateLanguage()">
             <h3>Envía tu solicitud y el equipo de soporte te dará una respuesta</h3>

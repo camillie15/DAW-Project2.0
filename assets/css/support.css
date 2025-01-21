@@ -1,9 +1,12 @@
-main {
+.main-support {
     width: 90%;
+    display: flex;
+    flex-direction: column;
     margin: auto;
+    padding-bottom: 30px;
 }
 
-table {
+#table-support {
     margin: auto;
     width: 100%;
     border-collapse: collapse;
@@ -12,31 +15,30 @@ table {
     & i {
         color: #000000;
     }
-}
 
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    word-wrap: break-word;
-}
-
-th {
-    background-color: #0066ff;
-    color: #ffffff;
-    text-align: center;
-}
-
-td {
-    text-align: center;
-}
-
-td:nth-child(3), th:nth-child(3) {
-    width: 45%;
-}
-
-td:nth-child(1), td:nth-child(2), td:nth-child(4), td:nth-child(5), 
-td:nth-child(6), td:nth-child(7), td:nth-child(8) {
-    width: auto;
+    & th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        word-wrap: break-word;
+    }
+    & th {
+        color: #ffffff;
+        background-color: #0066ff;
+        text-align: center;
+    }
+    
+    & td {
+        text-align: center;
+    }
+    
+    & td:nth-child(3), th:nth-child(3) {
+        width: 45%;
+    }
+    
+    & td:nth-child(1), td:nth-child(2), td:nth-child(4), td:nth-child(5), 
+    td:nth-child(6), td:nth-child(7), td:nth-child(8) {
+        width: auto;
+    }
 }
 
 .action-buttons {
@@ -62,6 +64,7 @@ td:nth-child(6), td:nth-child(7), td:nth-child(8) {
 }
 
 #supportHeader {
+    width: 100%;
     margin: auto;
     display: flex;
     margin-top: 20px;

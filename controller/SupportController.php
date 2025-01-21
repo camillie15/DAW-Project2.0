@@ -26,7 +26,7 @@ class SupportController{
     }
 
     public function show_requests(){
-        $_SESSION['rol'] = 3;
+        $_SESSION['rol'] = 1;
         if($_SESSION['rol'] == 1){
             $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['rol']);
         }else if($_SESSION['rol'] == 3){
@@ -48,13 +48,9 @@ class SupportController{
     public function create_request(){
         $this->checkRole(1);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            try{
-                $supportRequest = $this->setDataRequest();
-                $this->supportRequestDAO->insertSupportRequest($supportRequest);
-                header("Location: index.php?c=support&f=show_requests");
-            }catch(Exception e){
-
-            }
+            $supportRequest = $this->setDataRequest();
+            $this->supportRequestDAO->insertSupportRequest($supportRequest);
+            header("Location: index.php?c=support&f=show_requests");
         }
     }
 
@@ -68,14 +64,10 @@ class SupportController{
     public function update_request(){
         $this->checkRole(1);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            try{
-                $supportRequest = $this->setDataRequest();
-                $supportRequest->requestId = htmlentities($_POST['requestId']);
-                $this->supportRequestDAO->updateSupportRequest($supportRequest);
-                header("Location: index.php?c=support&f=show_requests");
-            }catch(Exception e){
-
-            }
+            $supportRequest = $this->setDataRequest();
+            $supportRequest->requestId = htmlentities($_POST['requestId']);
+            $this->supportRequestDAO->updateSupportRequest($supportRequest);
+            header("Location: index.php?c=support&f=show_requests");
         }
     }
 

@@ -1,6 +1,6 @@
 <?php require_once HEADER ?>
 
-<main>
+<main class="main-support">
     <div class="div-form">
         <div class="div-data-request">
             <h2>Datos de la solicitud</h2>
