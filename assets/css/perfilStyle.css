@@ -41,16 +41,7 @@
 }
 
 /* Botón genérico */
-.btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-}
+
 
 /* Botón de actualizar */
 .btn-primary {
@@ -75,17 +66,6 @@
 }
 
 /* Estilos para los campos de entrada, textarea y select */
-input,
-textarea,
-select {
-    box-sizing: border-box;
-    width: 100%;
-    font-size: 1rem;
-    padding: 8px 10px;
-    border: 1px solid #9CA3AF;
-    border-radius: 5px;
-    font-family: system-ui, 'Segoe UI';
-}
 
 /* Responsividad */
 @media screen and (max-width: 768px) {
