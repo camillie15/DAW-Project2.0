@@ -26,6 +26,8 @@ if ($rol < 1 || $rol > 3) {
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/returnStyle.css">
   <link rel="stylesheet" href="assets/css/perfilStyle.css">
+  <link rel="stylesheet" href="assets/css/support.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 
@@ -41,9 +43,9 @@ if ($rol < 1 || $rol > 3) {
   ?>
     <nav class="nav-links">
       <a href="index.php?c=returns&f=index">Devolucion</a>
-      <a href="#">Garantia</a>
+      <a href="index.php?c=guarantee&f=index">Garantia</a>
       <a href="#">FAQ</a>
-      <a href="#">Contactar</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
       <a href="index.php?c=user&f=perfil">Perfil</a>
     </nav>
   <?php
@@ -68,7 +70,7 @@ if ($rol < 1 || $rol > 3) {
   ?>
     <nav class="nav-links">
       <a href="#">FAQ</a>
-      <a href="#">Contactar</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
     </nav>
   <?php
   }

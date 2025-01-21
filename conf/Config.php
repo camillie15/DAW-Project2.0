@@ -11,6 +11,9 @@ define("FOOTER", 'view/template/footer.php');
 define("VRETURNS", "view/return/return.");
 
 // Conexión a la base de datos
+define("VSUPPORT", "view/support/support.");
+
+// conexion bb
 define("DBNAME", "resolveit");
 define("DBUSER", "root");
 define("DBPASSWORD", "");
