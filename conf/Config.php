@@ -12,6 +12,7 @@ define("FOOTER", 'view/template/footer.php');
 // path module view returns
 define("VRETURNS", "view/return/return.");
 define("VSUPPORT", "view/support/support.");
+define("VGUARANTEE", "view/guarantee/guarantee.");
 
 // conexion bb
 define("DBNAME", "resolveit");

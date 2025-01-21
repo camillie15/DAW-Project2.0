@@ -1,5 +1,5 @@
 <?php require_once HEADER; ?>
-<h1>Warranty Submission Form</h1>
+<h1>Formulario de Garantía</h1>
 <form action="index.php?c=guarantee&f=insert" method="post">
     <div>
         <label for="purchaseDate">Fecha de compra</label>
@@ -7,14 +7,16 @@
     </div>
 
     <div>
-        <label>Warranty Reason</label>
+        <label for="warrantyReasonId">Razón de Garantía</label>
         <div>
-            <?php foreach ($guaranteeReasons as $guaranteeReason){?>
-                <label>
-                    <input type="radio" required name="warrantyReasonId" value="<?php echo $guaranteeReason['warrantyReasonId'] ?>">
-                    <?php echo htmlspecialchars($guaranteeReason['description']) ?>
-                </label>
-            <?php } ?>
+            <select name="warrantyReasonId" id="warrantyReasonId" required>
+                <option value="" disabled selected>Selecciona el motivo</option>
+                <?php foreach ($guaranteeReasons as $guaranteeReason) { ?>
+                    <option value="<?php echo htmlspecialchars($guaranteeReason['warrantyReasonId']); ?>">
+                        <?php echo htmlspecialchars($guaranteeReason['description']); ?>
+                    </option>
+                <?php } ?>
+            </select>
         </div>
     </div>
 
@@ -35,4 +37,4 @@
 
     <button type="submit">Solicitar</button>
 </form>
-<?php require_once HEADER; ?>
+<?php require_once FOOTER; ?>
