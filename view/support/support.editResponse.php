@@ -1,19 +1,5 @@
-<?php 
-if (!isset($_SESSION)) {
-    session_start();
-}
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Solicitudes de Soporte</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/support.css">
-</head>
 <?php require_once HEADER ?>
 
-<body>
 <main>
     <div class="div-form">
         <div class="div-data-request">
@@ -32,7 +18,5 @@ if (!isset($_SESSION)) {
         </form>
     </div>
 </main>
-<?php require_once FOOTER ?>
-</body>
 
-</html>
+<?php require_once FOOTER ?>

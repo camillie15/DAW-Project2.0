@@ -26,7 +26,7 @@ class SupportController{
     }
 
     public function show_requests(){
-        $_SESSION['rol'] = 1;
+        $_SESSION['rol'] = 3;
         if($_SESSION['rol'] == 1){
             $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['rol']);
         }else if($_SESSION['rol'] == 3){
