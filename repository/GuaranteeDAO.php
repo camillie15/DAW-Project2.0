@@ -63,6 +63,21 @@ class GuaranteeDAO
         }
     }
 
+    public function getGuaranteesByUserId($userId)
+    {
+        try {
+            $sql = "SELECT * FROM guarantees WHERE userId = :userId";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(":userId", $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e) {
+            error_log("Error en la consulta: " . $e->getMessage());
+        }
+    }
+
+
     public function delete($guaranteeId)
     {
         try {
@@ -105,6 +120,34 @@ class GuaranteeDAO
         } catch (PDOException $e) {
             error_log("Error al actualizar la garantía: " . $e->getMessage());
             return false;
+        }
+    }
+
+    public function updateStatus($guaranteeId, $newStatus)
+    {
+        try {
+            $sql = "UPDATE guarantees SET requestStatus = :status WHERE guaranteeId = :guaranteeId";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(":status", $newStatus, PDO::PARAM_INT);
+            $stmt->bindValue(":guaranteeId", $guaranteeId, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error en la actualización del estado: " . $e->getMessage());
+        }
+    }
+    
+    // remove this method when the user DAO is created
+    public function getUserById($userId)
+    {
+        try {
+            $sql = "SELECT * FROM users WHERE userId = :userId";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(":userId", $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error en la consulta: " . $e->getMessage());
         }
     }
 }

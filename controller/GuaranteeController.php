@@ -10,10 +10,21 @@ class GuaranteeController
     private $guaranteeDAO;
     private $guaranteeReasonDAO;
 
+    const ROLE_CLIENT = 1;
+    const ROLE_EMPLOYEE = 2;
+
     public function __construct()
     {
         $this->guaranteeDAO = new GuaranteeDAO();
         $this->guaranteeReasonDAO = new GuaranteeReasonsDAO();
+    }
+
+    private function checkRole($rol)
+    {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] != $rol) {
+            Header("Location: index.php");
+            exit();
+        }
     }
 
     public function index()
@@ -23,33 +34,60 @@ class GuaranteeController
 
     public function insertForm()
     {
+        $_SESSION['rol'] = 1; // Hardcoded for testing purposes
+        $this->checkRole(self::ROLE_CLIENT);
         $guaranteeReasons = $this->guaranteeReasonDAO->getGuaranteeReason();
         require_once VGUARANTEE . 'new.php';
     }
 
     public function insert()
     {
+        $this->checkRole(self::ROLE_CLIENT);
         $guarantee = $this->setData();
         $this->guaranteeDAO->insert($guarantee);
         header("Location: index.php?c=guarantee&f=listGuarantees");
     }
 
-    public function listGuarantees() {
-        $guarantees = $this->guaranteeDAO->getGuarantees();
-        
-        foreach ($guarantees as $index => $guarantee) {
-            $guarantees[$index]['warrantyReasonName'] = $this->getWarrantyReasonName($guarantee['warrantyReasonId']);
+    public function listGuarantees()
+    {
+        $_SESSION['rol'] = 2; // Hardcoded for testing purposes
+
+        if ($_SESSION['rol'] == self::ROLE_CLIENT) {
+            $this->checkRole(self::ROLE_CLIENT);
+            $_SESSION['userId'] = 2; // Hardcoded for testing purposes
+            $userId = $_SESSION['userId'];
+            $guarantees = $this->guaranteeDAO->getGuaranteesByUserId($userId);
+        } else if ($_SESSION['rol'] == self::ROLE_EMPLOYEE) {
+            $this->checkRole(self::ROLE_EMPLOYEE);
+            $guarantees = $this->guaranteeDAO->getGuarantees();
+
+            foreach ($guarantees as $index => $guarantee) {
+                $user = $this->guaranteeDAO->getUserById($guarantee['userId']); // This method does not exist
+                $guarantees[$index]['userName'] = $user['userName'];
+            }
+        } else {
+            Header("Location: index.php");
+            exit();
         }
 
         foreach ($guarantees as $index => $guarantee) {
+            $guarantees[$index]['warrantyReasonName'] = $this->getWarrantyReasonName($guarantee['warrantyReasonId']);
             $guarantees[$index]['requestStatusName'] = $this->getRequestStatusName($guarantee['requestStatus']);
         }
+
         require_once 'view/guarantee/guarantee.list.php';
     }
-      
+
+    // private function getUserById($userId)
+    // {
+    //     $userDAO = new UserDAO();
+    //     return $userDAO->getUserById($userId);
+    // }
+
 
     public function editForm()
     {
+        $this->checkRole(self::ROLE_CLIENT);
         $guaranteeId = $_GET['id'];
         $guarantee = $this->guaranteeDAO->getGuaranteeById($guaranteeId);
         if ($guarantee) {
@@ -62,6 +100,7 @@ class GuaranteeController
 
     public function delete()
     {
+        $this->checkRole(self::ROLE_CLIENT);
         $guaranteeId = $_GET['id'];
         $this->guaranteeDAO->delete($guaranteeId);
         header("Location: index.php?c=guarantee&f=listGuarantees");
@@ -69,6 +108,7 @@ class GuaranteeController
 
     public function update()
     {
+        $this->checkRole(self::ROLE_CLIENT);
         $guaranteeId = $_POST['guaranteeId'];
         $guaranteeData = $this->guaranteeDAO->getGuaranteeById($guaranteeId);
 
@@ -99,7 +139,21 @@ class GuaranteeController
         }
     }
 
-    private function getRequestStatusName($statusId) {
+    public function updateStatus()
+    {
+        $this->checkRole(self::ROLE_EMPLOYEE);
+
+        $guaranteeId = $_GET['id'];
+        $newStatus = $_POST['status'];
+
+        $this->guaranteeDAO->updateStatus($guaranteeId, $newStatus);
+
+        header("Location: index.php?c=guarantee&f=listGuarantees");
+    }
+
+
+    private function getRequestStatusName($statusId)
+    {
         switch ($statusId) {
             case 0:
                 return 'Pendiente';
@@ -112,7 +166,8 @@ class GuaranteeController
         }
     }
 
-    private function getWarrantyReasonName($warrantyReasonId) {
+    private function getWarrantyReasonName($warrantyReasonId)
+    {
         switch ($warrantyReasonId) {
             case 1:
                 return 'Defectos de fabricación';
@@ -127,7 +182,7 @@ class GuaranteeController
             default:
                 return 'Razón desconocida';
         }
-    }    
+    }
 
     private function setData()
     {

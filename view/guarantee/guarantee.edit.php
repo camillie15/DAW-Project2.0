@@ -52,15 +52,6 @@
         </div>
 
         <div>
-            <label for="requestStatus">Estado:</label>
-            <select id="requestStatus" name="requestStatus" required>
-                <option value="0" <?php echo ($guarantee['requestStatus'] == 0) ? 'selected' : ''; ?>>Pendiente</option>
-                <option value="1" <?php echo ($guarantee['requestStatus'] == 1) ? 'selected' : ''; ?>>Aprobada</option>
-                <option value="2" <?php echo ($guarantee['requestStatus'] == 2) ? 'selected' : ''; ?>>Rechazada</option>
-            </select>
-        </div>
-
-        <div>
             <button type="submit">Guardar Cambios</button>
             <a href="index.php?c=guarantee&f=listGuarantees">Cancelar</a>
         </div>
