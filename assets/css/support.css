@@ -4,6 +4,7 @@
     flex-direction: column;
     margin: auto;
     flex-grow: 1;
+    flex-grow: 1;
 }
 
 #table-support {
@@ -51,6 +52,7 @@
     justify-content: center;
 }
 
+.btn-support {
 .btn-support {
     box-sizing: border-box;
     border: 2px solid #0066ff;
