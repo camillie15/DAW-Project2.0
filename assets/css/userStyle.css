@@ -61,16 +61,7 @@
 }
 
 /* Botón genérico */
-.btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-}
+
 
 /* Botón de actualizar */
 .btn-primary {
@@ -95,79 +86,6 @@
 }
 
 /* Estilos generales para el formulario */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 50%;
-    margin: 20px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border: 1px solid #ececec;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
+
 
 /* Estilos para los títulos y textos del formulario */
-form h1 {
-    font-size: 2rem;
-    color: #464853;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-form label {
-    font-size: 1rem;
-    color: #464853;
-    font-weight: bold;
-}
-
-/* Estilos para los campos de entrada y textarea */
-& input,
-textarea,
-select {
-    box-sizing: border-box;
-    width: 100%;
-    font-size: 1rem;
-    padding: 8px 10px;
-    border: 1px solid #9CA3AF;
-    border-radius: 5px;
-    font-family: system-ui, 'Segoe UI';
-}
-
-/* Botón del formulario */
-form button {
-    background-color: #0066ff;
-    color: #fff;
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    text-transform: uppercase;
-}
-
-form button:hover {
-    background-color: #004bbd;
-    box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
-}
-
-/* Estilo para el texto del enlace */
-form p {
-    font-size: 1rem;
-    color: #464853;
-    text-align: center;
-}
-
-form p a {
-    color: #0066ff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-form p a:hover {
-    text-decoration: underline;
-}
