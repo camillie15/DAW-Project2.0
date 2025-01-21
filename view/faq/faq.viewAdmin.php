@@ -3,14 +3,19 @@
 <main class="container-faqs">
     <!-- Sección para agregar nueva FAQ -->
     <section class="container-add-faq">
+        <div>
         <h2 class="title-faq">Agregar Nueva Pregunta Frecuente</h2>
+        </div>
         <form method="post" action="index.php?c=faq&f=insert_faq" class="form-add-faq">
+            <div class="container-question-answer">
             <label for="question">Pregunta:</label>
-            <input type="text" id="question" name="question" required>
+            <textarea id="question" name="question" required></textarea>
 
             <label for="answer">Respuesta:</label>
             <textarea id="answer" name="answer" required></textarea>
+            </div>
 
+            <div class="container-author-category">
             <label for="author">Autor:</label>
             <input type="text" id="author" name="author" required>
 
@@ -21,15 +26,17 @@
                 <option value="3">Garantia</option>
                 <option value="4">Privacidad</option>
             </select>
-
+            </div>
+            
+            <div class="container-priority-button">
             <label for="priority">Prioridad:</label>
             <select id="priority" name="priority" required>
                 <option value="Baja">Baja</option>
                 <option value="Media">Media</option>
                 <option value="Alta">Alta</option>
             </select>
-
             <button type="submit" class="btn-add-faq">Agregar FAQ</button>
+            </div>
         </form>
     </section>
 

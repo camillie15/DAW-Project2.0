@@ -9,7 +9,7 @@ body {
 
 .container-faqs {
     max-width: 1200px;
-    width: 90%;    
+    width: 80%;    
     margin: 0 auto;
     padding: 20px;
 }
@@ -121,7 +121,6 @@ body {
     font-size: 16px;
     color: #999;
 }
-.d
 /* Botón de actualizar FAQ */
 .btn-edit-faq {
     padding: 10px 20px;
@@ -160,6 +159,8 @@ body {
 /* Contenedor de agregar nueva pregunta frecuente */
 .container-add-faq {
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
@@ -168,23 +169,47 @@ body {
 }
 
 
+.container-titel-faq {
+    text-align: center;
+    color: #333;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
 .form-add-faq {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    justify-content: center;
+}
+
+.container-question-answer{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     gap: 10px;
     justify-content: center;
 }
 
-.form-add-faq label {
+.container-question-answer label {
     font-size: 14px;
-    margin-right: 5px;
     width: 100px; 
     text-align: right;
 }
-
-.form-add-faq input[type="text"],
-.form-add-faq textarea,
-.form-add-faq select {
+.container-author-category{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+.container-author-category label {
+    font-size: 14px;
+    width: 100px; 
+    text-align: right;
+}
+.container-author-category select {
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ddd;
@@ -193,15 +218,25 @@ body {
     max-width: 400px; 
     background-color: #f9f9f9;
 }
-
-.form-add-faq textarea {
-    resize: vertical;
-    min-height: 80px;
+.container-priority-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
 }
-
+.container-priority-button label {
+    font-size: 14px;
+    margin-right: 5px;
+    width: 100px; 
+    text-align: right;
+}   
 .btn-add-faq {
+    text-align: center;
     padding: 10px 20px;
     font-size: 14px;
+    width: fit-content;
     color: #fff;
     background-color: #28a745;
     border: none;
@@ -213,3 +248,23 @@ body {
 .btn-add-faq:hover {
     background-color: #218838;
 }
+
+
+.form-add-faq input[type="text"],
+.container-question-answer textarea,
+.form-add-faq select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: calc(100% - 120px); 
+    max-width: 400px; 
+    background-color: #f9f9f9;
+}
+
+.form-add-faq textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+

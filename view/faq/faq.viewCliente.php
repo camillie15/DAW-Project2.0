@@ -5,7 +5,7 @@
         <h2 class="title-faq">Buscar Preguntas Frecuentes</h2>
         <form method="get" action="index.php" class="form-search-faq">
             <input type="hidden" name="c" value="faq">
-            <input type="hidden" name="f" value="list_cliente_view">
+            <input type="hidden" name="f" value="list_client_view">
             <label for="keyword">Palabra clave:</label>
             <input type="text" id="keyword" name="keyword" value="<?= isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : '' ?>">
 
