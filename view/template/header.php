@@ -1,22 +1,19 @@
 <?php
+require_once 'model/User.php';
 if (!isset($_SESSION)) session_start();
-
-//Logica para asignar el rol a una variable para utilizar para el rol
-
+// Verificar si el usuario está logueado
 if (!empty($_SESSION['userLogged'])) {
   $user = $_SESSION['userLogged'];
-  $rol = $user->getRol();
+  $rol = $user->getUserRole();  // Asegúrate de que el rol esté en el array de sesión.
 } else {
-
-  //Logica para redirigir a la pagina de login si no existe el usuario logeado
-  //HEADER('Location: view/login.php');
-
-
-  // Rol para pruebas
-  $rol = 1;
+  // Redirigir a la página de login si no existe el usuario logueado
+  header('Location: index.php?c=user&f=index');
+  exit();
 }
-
-
+if ($rol < 1 || $rol > 3) {
+  header('Location: index.php?c=user&f=index');
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +25,7 @@ if (!empty($_SESSION['userLogged'])) {
   <title>ResolveIT</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/returnStyle.css">
+  <link rel="stylesheet" href="assets/css/perfilStyle.css">
 </head>
 
 
@@ -46,6 +44,7 @@ if (!empty($_SESSION['userLogged'])) {
       <a href="#">Garantia</a>
       <a href="#">FAQ</a>
       <a href="#">Contactar</a>
+      <a href="index.php?c=user&f=perfil">Perfil</a>
     </nav>
   <?php
   }
@@ -74,5 +73,5 @@ if (!empty($_SESSION['userLogged'])) {
   <?php
   }
   ?>
-    <a class="nav-button" href="#">Cerrar Sesión</a>
+  <a class="nav-button" href="index.php?c=user&f=logout">Cerrar Sesión</a>
 </header>
