@@ -1,19 +1,20 @@
 <?php
-//controlador y funcion predefinida
+// Controlador y función predefinida
 define("CONTROLADOR_PRINCIPAL", "index");
 define("FUNCION_PRINCIPAL", "index");
 
-
-//ruta de templates
+// Ruta de templates
 define("HEADER", 'view/template/header.php');
 define("FOOTER", 'view/template/footer.php');
 
-
-// path module view returns
+// Ruta del módulo de vistas de devolución
 define("VRETURNS", "view/return/return.");
+
+// Conexión a la base de datos
 define("VSUPPORT", "view/support/support.");
 
 // conexion bb
 define("DBNAME", "resolveit");
 define("DBUSER", "root");
 define("DBPASSWORD", "");
+
