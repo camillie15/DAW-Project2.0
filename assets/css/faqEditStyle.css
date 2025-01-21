@@ -1,0 +1,74 @@
+/* Contenedor de editar pregunta frecuente */
+.container-edit-faq {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Título de la sección */
+.title-faq {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Formulario de edición */
+.form-edit-faq {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Etiquetas del formulario */
+.form-edit-faq label {
+    font-size: 14px;
+    margin-right: 5px;
+    width: 100px; 
+    text-align: right;
+}
+
+/* Campos de entrada y selección */
+.form-edit-faq input[type="text"],
+.form-edit-faq textarea,
+.form-edit-faq select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: calc(100% - 120px);
+    max-width: 400px;
+    background-color: #f9f9f9;
+}
+
+.form-edit-faq textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+.faq-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+/* Botón de actualizar FAQ */
+.btn-edit-faq {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-edit-faq:hover {
+    background-color: #0056b3;
+}
