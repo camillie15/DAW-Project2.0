@@ -18,7 +18,7 @@ if (!isset($_SESSION)) {
         <?php endif; ?>
     </div>
     <div>
-        <table>
+        <table id="table-support">
             <thead>
                 <tr>
                     <?php if ($_SESSION['rol'] == 3): ?>
