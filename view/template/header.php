@@ -45,7 +45,7 @@ if (!empty($_SESSION['userLogged'])) {
   ?>
     <nav class="nav-links">
       <a href="index.php?c=returns&f=index">Devolucion</a>
-      <a href="#">Garantia</a>
+      <a href="index.php?c=guarantee&f=index">Garantia</a>
       <a href="#">FAQ</a>
       <a href="index.php?c=support&f=show_requests">Contactar</a>
     </nav>
