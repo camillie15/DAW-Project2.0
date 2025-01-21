@@ -1,22 +1,19 @@
 <?php
+require_once 'model/User.php';
 if (!isset($_SESSION)) session_start();
-
-//Logica para asignar el rol a una variable para utilizar para el rol
-
+// Verificar si el usuario está logueado
 if (!empty($_SESSION['userLogged'])) {
   $user = $_SESSION['userLogged'];
-  $rol = $user->getRol();
+  $rol = $user->getUserRole();  // Asegúrate de que el rol esté en el array de sesión.
 } else {
-
-  //Logica para redirigir a la pagina de login si no existe el usuario logeado
-  //HEADER('Location: view/login.php');
-
-
-  // Rol para pruebas
-  $rol = 3;
+  // Redirigir a la página de login si no existe el usuario logueado
+  header('Location: index.php?c=user&f=index');
+  exit();
 }
-
-
+if ($rol < 1 || $rol > 3) {
+  header('Location: index.php?c=user&f=index');
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +25,9 @@ if (!empty($_SESSION['userLogged'])) {
   <title>ResolveIT</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/returnStyle.css">
-  <link rel="stylesheet" href="assets/css/faqStyle.css">
-  <link rel="stylesheet" href="assets/css/faqEditStyle.css">
+  <link rel="stylesheet" href="assets/css/perfilStyle.css">
+  <link rel="stylesheet" href="assets/css/support.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 
@@ -45,9 +43,10 @@ if (!empty($_SESSION['userLogged'])) {
   ?>
     <nav class="nav-links">
       <a href="index.php?c=returns&f=index">Devolucion</a>
-      <a href="#">Garantia</a>
-      <a href="index.php?c=faq&f=list_client_view">FAQ</a> <!-- Enlace para ver los FAQs -->
-      <a href="#">Contactar</a>
+      <a href="index.php?c=guarantee&f=index">Garantia</a>
+      <a href="#">FAQ</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
+      <a href="index.php?c=user&f=perfil">Perfil</a>
     </nav>
   <?php
   }
@@ -70,11 +69,11 @@ if (!empty($_SESSION['userLogged'])) {
   if ($rol == 3) {
   ?>
     <nav class="nav-links">
-      <a href="index.php?c=faq&f=list_admin_view">FAQ</a> <!-- Enlace para administrar los FAQs -->
-      <a href="#">Contactar</a>
+      <a href="#">FAQ</a>
+      <a href="index.php?c=support&f=show_requests">Contactar</a>
     </nav>
   <?php
   }
   ?>
-    <a class="nav-button" href="#">Cerrar Sesión</a>
+  <a class="nav-button" href="index.php?c=user&f=logout">Cerrar Sesión</a>
 </header>
