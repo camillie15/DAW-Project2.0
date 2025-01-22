@@ -11,7 +11,7 @@
             <input type="hidden" name="responseId" value="<?php echo htmlspecialchars($supportResponse['responseId']); ?>">
             <input type="hidden" name="requestId" value="<?php echo htmlspecialchars($supportResponse['requestId']); ?>">
             <label class="label-bold" for="response">Respuesta</label>
-            <textarea name="response" id="response" maxlength="250"><?php echo html_entity_decode($supportResponse['response'], ENT_QUOTES, 'UTF-8'); ?></textarea>
+            <textarea name="response" id="response" maxlength="250" required><?php echo html_entity_decode($supportResponse['response'], ENT_QUOTES, 'UTF-8'); ?></textarea>
             <div class="div-buttons">
                 <input type="submit" value="Actualizar respuesta">
             </div>

@@ -12,6 +12,7 @@
     border-collapse: collapse;
     table-layout: fixed;
     margin-bottom: 30px;
+    margin-top: 0;
 
     & i {
         color: #000000;
@@ -71,13 +72,14 @@
     margin-top: 20px;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 15px;
 
     & a {
         width: fit-content;
         align-self: flex-end;
     }
 
-    & h1, h3, p{
+    & h1, h3, p, h4{
         margin: 0;
         padding: 0;       
     }

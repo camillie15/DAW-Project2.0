@@ -1,8 +1,6 @@
 <?php
 require_once 'model/User.php';
 
-session_start();
-
 date_default_timezone_set('America/Guayaquil');
 require_once 'model/SupportRequest.php';
 require_once 'model/SupportResponse.php';
@@ -14,6 +12,7 @@ class SupportController{
     private $supportResponseDAO;
 
     public function __construct(){
+        session_start();
         $this->supportRequestDAO = new SupportRequestDAO();
         $this->supportResponseDAO = new SupportResponseDAO();
     }
