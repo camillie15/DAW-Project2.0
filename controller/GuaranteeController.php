@@ -1,27 +1,31 @@
 <?php
-session_start();
-
+require_once 'model/User.php';
 require_once 'model/Guarantee.php';
 require_once 'repository/GuaranteeDAO.php';
 require_once 'repository/GuaranteeReasonsDAO.php';
+require_once 'repository/UserDao.php';
 
 class GuaranteeController
 {
     private $guaranteeDAO;
     private $guaranteeReasonDAO;
 
+    private $userDAO;
+
     const ROLE_CLIENT = 1;
     const ROLE_EMPLOYEE = 2;
 
     public function __construct()
     {
+        session_start();
         $this->guaranteeDAO = new GuaranteeDAO();
         $this->guaranteeReasonDAO = new GuaranteeReasonsDAO();
+        $this->userDAO = new UserDAO();
     }
 
     private function checkRole($rol)
     {
-        if (!isset($_SESSION['rol']) || $_SESSION['rol'] != $rol) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']->getUserRole() != $rol) {
             Header("Location: index.php");
             exit();
         }
@@ -34,7 +38,6 @@ class GuaranteeController
 
     public function insertForm()
     {
-        $_SESSION['rol'] = 1; // Hardcoded for testing purposes
         $this->checkRole(self::ROLE_CLIENT);
         $guaranteeReasons = $this->guaranteeReasonDAO->getGuaranteeReason();
         require_once VGUARANTEE . 'new.php';
@@ -49,20 +52,19 @@ class GuaranteeController
     }
 
     public function listGuarantees()
-    {
-        $_SESSION['rol'] = 2; // Hardcoded for testing purposes
+    {   
+        $rol = $_SESSION['userLogged']->getUserRole();
 
-        if ($_SESSION['rol'] == self::ROLE_CLIENT) {
+        if ($rol == self::ROLE_CLIENT) {
             $this->checkRole(self::ROLE_CLIENT);
-            $_SESSION['userId'] = 2; // Hardcoded for testing purposes
-            $userId = $_SESSION['userId'];
+            $userId = $_SESSION['userLogged']->getIdUser();
             $guarantees = $this->guaranteeDAO->getGuaranteesByUserId($userId);
-        } else if ($_SESSION['rol'] == self::ROLE_EMPLOYEE) {
+        } else if ($rol == self::ROLE_EMPLOYEE) {
             $this->checkRole(self::ROLE_EMPLOYEE);
             $guarantees = $this->guaranteeDAO->getGuarantees();
 
             foreach ($guarantees as $index => $guarantee) {
-                $user = $this->guaranteeDAO->getUserById($guarantee['userId']); // This method does not exist
+                $user = $this->userDAO->getUserById($guarantee['userId']);
                 $guarantees[$index]['userName'] = $user['userName'];
             }
         } else {
@@ -77,13 +79,6 @@ class GuaranteeController
 
         require_once 'view/guarantee/guarantee.list.php';
     }
-
-    // private function getUserById($userId)
-    // {
-    //     $userDAO = new UserDAO();
-    //     return $userDAO->getUserById($userId);
-    // }
-
 
     public function editForm()
     {
@@ -187,7 +182,7 @@ class GuaranteeController
     private function setData()
     {
         $guarantee = new Guarantee();
-        $guarantee->setUserId(1);
+        $guarantee->setUserId($_SESSION['userLogged']->getIdUser());
         $guarantee->setRequestDate(new DateTime('now'));
         $this->setGuaranteeProperties($guarantee, $_POST);
         $guarantee->setStatus(1);

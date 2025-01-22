@@ -124,4 +124,18 @@ class UserDAO
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['COUNT(*)'] > 0;
     }
+
+    public function getUserById($userId)
+    {
+        try {
+            $sql = "SELECT * FROM users WHERE userId = :userId";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(":userId", $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error en la consulta: " . $e->getMessage());
+        }
+    }
 }

@@ -1,0 +1,361 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2f32ec;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input, form textarea, form select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form textarea {
+    resize: none;
+}
+
+form button {
+    padding: 10px 15px;
+    background-color: #2f32ec;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #2326b0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table th {
+    background-color: #2f32ec;
+    color: #fff;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+a {
+    color: #2f32ec;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-container a {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #2f32ec;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.button-container a:hover {
+    background-color: #2326b0;
+}
+
+@media (max-width: 768px) {
+    form {
+        width: 95%;
+    }
+
+    table th, table td {
+        font-size: 0.9rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+}
+
+.garantia-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.garantia-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.garantia-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.garantia-form input, .garantia-form select, .garantia-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.garantia-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.garantia-form button:hover {
+    background-color: #0056b3;
+}
+
+.garantia-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.garantia-table th, .garantia-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.garantia-table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.garantia-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.garantia-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.estado-pendiente {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.estado-aprobado {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.estado-rechazado {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.btn-accion {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-editar {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background-color: #0056b3;
+}
+
+.btn-eliminar {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-ver {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-ver:hover {
+    background-color: #1e7e34;
+}
+
+.contenedor-garantia {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.contenedor-garantia h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.contenedor-garantia p {
+    font-size: 14px;
+    color: #555;
+}
+
+.mensaje-exito {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.mensaje-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.btn-guarantee {
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 2px solid #2f32ec;
+    border-radius: 25px;
+    width: fit-content;
+}
+
+.btn-guarantee:hover {
+    text-decoration: none;
+    background-color: #2f32ec;
+    color: #fff;
+}
+
+.actions-garantee {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.table-guarantee {
+    width: 100%;
+    margin: auto;
+}
+
+.page-title {
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.actions-guarantee {
+    align-self: flex-end;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    background-color: #2f32ec;
+    color: #fff;
+    padding: 15px;
+}
+
+.actions-guarantee:hover {
+    background-color: #2326b0;
+    transform: scale(1.05);
+}
+
+.guarantee-list {
+    width: 80%;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+}
+
+.form-guarantee {
+    display: flex;
+    margin: auto;
+}
+.container-rules-guarantee {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: auto;
+    width: 35%;
+}
+
+.guarantee-subtitle {
+    margin: 0px;
+}
