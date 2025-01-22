@@ -6,12 +6,12 @@ if (!isset($_SESSION)) {
 <?php require_once HEADER ?>
 <main class="main-support">
     <div id="supportHeader">
-        <?php if ($_SESSION['rol'] == 1): ?>
+        <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
             <h1>Contáctanos</h1>
             <h3>Bienvenido a nuestra página de contacto</h3>
             <p>Aquí podrás crear una nueva solicitud de soporte, ver el historial de tus solicitudes anteriores y 
                 ponerte en contacto con nosotros de la manera conveniente</p>
-            <a href="index.php?c=support&f=form_create_request" class="btn">Nueva Solicitud</a>
+            <a href="index.php?c=support&f=form_create_request" class="btn-support">Nueva Solicitud</a>
             <h4>Solicitudes registradas:</h4>
         <?php else:?>
             <h2>Solicitudes de contacto</h2>
@@ -21,7 +21,7 @@ if (!isset($_SESSION)) {
         <table id="table-support">
             <thead>
                 <tr>
-                    <?php if ($_SESSION['rol'] == 3): ?>
+                    <?php if ($_SESSION['userLogged']->getUserRole() == 3): ?>
                         <th>Usuario</th>
                     <?php else: ?>
                         <th>Id Solicitud</th>
@@ -30,7 +30,7 @@ if (!isset($_SESSION)) {
                     <th>Descripción</th>
                     <th>Prioridad</th>
                     <th>Fecha de la solicitud</th>
-                    <?php if ($_SESSION['rol'] == 1): ?>
+                    <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
                         <th>Idioma</th>
                     <?php endif; ?>
                     <th>Estado</th>
@@ -41,7 +41,7 @@ if (!isset($_SESSION)) {
                 <?php if (!empty($supportRequests)): ?>
                     <?php foreach ($supportRequests as $request): ?>
                         <tr>
-                            <?php if ($_SESSION['rol'] == 1): ?>
+                            <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
                                 <td><?php echo $request['requestId']; ?></td>
                                 <td><?php echo html_entity_decode($request['subject'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><?php echo html_entity_decode($request['description'], ENT_QUOTES, 'UTF-8'); ?></td>
@@ -54,7 +54,7 @@ if (!isset($_SESSION)) {
                                     <br>
                                     <?php echo $date->format('H:i'); ?>
                                 </td>
-                                <?php if ($_SESSION['rol'] == 1): ?>
+                                <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
                                     <td><?php echo $request['language']; ?></td>
                                 <?php endif; ?>
                                 <td><?php echo ($request['requestStatus'] == 0) ? 'Pendiente' : 'Resuelta'; ?></td>
@@ -108,8 +108,8 @@ if (!isset($_SESSION)) {
                 </div>
                 <label>¿Estás seguro de que deseas eliminar esta solicitud de soporte?</label>
                 <div class="div-buttons-modal">
-                    <button class="btn"  type="button">Cancelar</button>
-                    <a class="btn" href="" id="confirmDeleteButton">Eliminar</a>
+                    <button class="btn-support" type="button">Cancelar</button>
+                    <a class="btn-support" href="" id="confirmDeleteButton">Eliminar</a>
                 </div>
             </div>
         </div>
@@ -119,7 +119,7 @@ if (!isset($_SESSION)) {
             <h4 id="modalTitle">Detalle de la respuesta</h4>
             <div id="responseContent"></div>
             <div class="div-buttons-modal">
-                <button class="btn" type="button" id="closeModalButton">Cerrar</button>
+                <button class="btn-support" type="button" id="closeModalButton">Cerrar</button>
             </div>
         </div>
     </div>

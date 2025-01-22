@@ -1,0 +1,178 @@
+<?php
+// controllers/UserController.php
+
+require_once 'model/User.php';
+require_once 'repository/UserDAO.php';
+
+class UserController
+{
+
+    // Método para mostrar el formulario de login
+    public function __construct()
+    {
+        session_start();
+    }
+
+    public function index()
+    {
+        $this->verifyLogin();
+        require_once 'view/loginView.php';
+    }
+
+    public function perfil()
+    {
+        // Aquí debes verificar si los datos han sido actualizados o no
+        require_once 'view/user/user.perfil.php';
+    }
+
+    // Método para redirigir al formulario de actualización
+    public function updateProfile()
+    {
+
+        // Cargar la vista de actualización con los datos del usuario
+        require_once 'view/user/user.update.php';
+    }
+
+    // Método para procesar la actualización de datos
+    public function processUpdate()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['firstName'], $_POST['lastName'], $_POST['userName'], $_POST['email'], $_POST['password'])) {
+                $firstName = trim($_POST['firstName']);
+                $lastName = trim($_POST['lastName']);
+                $userName = trim($_POST['userName']);
+                $email = trim($_POST['email']);
+                $password = trim($_POST['password']);
+
+                // Crear un nuevo objeto usuario con los nuevos datos
+                $user = new User($_SESSION['userLogged']->getIdUser(), $firstName, $lastName, $userName, $email, $password);
+                $user->setUserRole($_SESSION['userLogged']->getUserRole());
+             /*     $user->setStatus($_SESSION['userLogged']->getStatus()); */
+
+                // Actualizar en la base de datos
+                $userDAO = new UserDAO();
+                if ($userDAO->update($user)) {
+                    // Actualizar la sesión con los nuevos datos
+                    $_SESSION['userLogged'] = $user;
+                    // Redirigir a la página de perfil para evitar el reenvío del formulario
+                    header('Location: index.php?c=user&f=perfil');
+                     exit(); // Asegúrate de detener el script después de la redirección
+                } else {
+                    echo "Error al actualizar los datos.";
+                }
+            }
+        }else{
+            header('Location: index.php?c=index&f=index');
+            exit();
+        }
+    }
+
+
+    // Método para eliminar la cuenta (cambiar estado a 0)
+    public function deleteAccount()
+    {
+        $userId = $_SESSION['userLogged']->getIdUser();
+        $userDAO = new UserDAO();
+
+        // Cambiar el status a 0 (eliminación lógica)
+        if ($userDAO->delete($userId)) {
+            session_unset();
+            session_destroy();
+            header('Location: index.php?c=user&f=login');
+        } else {
+            echo "Error al eliminar la cuenta.";
+        }
+    }
+
+
+
+    //Funcion para poder verigficar si existe la session del usuario, y poder redirigir al homeView
+    private function verifyLogin()
+    {
+        if (isset($_SESSION['userLogged'])) {
+            header('Location: index.php?c=index&f=index');
+            exit();
+        }
+    }
+
+    public function login()
+    {
+        $this->verifyLogin();
+        require_once 'view/user/user.login.php';
+    }
+
+    // Método para procesar el login
+    public function processLogin()
+    {
+        $this->verifyLogin();
+        // Obtener los valores de userName y password desde el formulario
+        $userName = $_POST['userName'];
+        $password = $_POST['password'];  // Cambiado de contrasena a password
+
+        // Llamar al método login() pasando los dos parámetros esperados
+        $userDAO = new UserDAO();
+        $user = $userDAO->login($userName, $password);  // Cambiado de contrasena a password
+
+        // Si el login es exitoso, redirigir o hacer lo necesario
+        if ($user !== null) {
+            // Crear el objeto de usuario solo con idUser y userRole
+            /* $userSession = new User($user->getIdUser(), $user->getUserRole()); */
+
+            // Guardar la información del usuario en la sesión
+            $_SESSION['userLogged'] = $user;
+
+            // Redirigir a la página correspondiente
+            /*    require_once 'view/homeView.php'; */
+            header("location:index.php");
+            exit();
+        } else {
+            // Si no se encontró el usuario, mostrar un mensaje de error
+            echo "Usuario o password incorrectos.";  // Cambiado de contrasena a password
+        }
+    }
+
+    // Método para mostrar el formulario de registro
+    public function register()
+    {
+        require_once 'view/user/user.register.php';
+    }
+
+    // Método para procesar el registro
+    public function processRegister()
+    {
+        if (
+            isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['userName']) &&
+            isset($_POST['email']) && isset($_POST['password'])
+        ) {
+
+            $firstName = trim($_POST['firstName']);
+            $lastName = trim($_POST['lastName']);
+            $userName = trim($_POST['userName']);
+            $email = trim($_POST['email']);
+            $password = trim($_POST['password']);  // Cambiado de contrasena a password
+
+            $user = new User(null, $firstName, $lastName, $userName, $email, $password);
+
+            // Asignamos el rol 1 por defecto (Cliente)
+            $user->setUserRole(1);  // Asignamos rol por defecto
+            $user->setStatus(1);  // Establecemos el estado como activo (1)
+
+            // Registrar el usuario en la base de datos
+            $userDAO = new UserDAO();
+            if ($userDAO->register($user)) {
+                // Redirigir a la página de login
+                header('Location: index.php?c=user&f=login');
+            } else {
+                echo "Error al registrar el usuario.";
+            }
+        }
+    }
+    public function logout()
+    {
+        session_start();
+        session_unset();
+        session_destroy();
+        header('Location: index.php?c=user&f=login');
+        exit();
+    }
+}
