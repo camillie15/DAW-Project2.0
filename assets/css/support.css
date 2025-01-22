@@ -59,12 +59,16 @@
     color: #0066ff;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9rem;
 
     &:hover {
         transform: scale(1.05);
     }
 }
 
+.a-support, .a-support :visited{
+    color: #0066ff;
+}
 #supportHeader {
     width: 100%;
     margin: auto;

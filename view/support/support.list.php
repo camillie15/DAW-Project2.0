@@ -6,6 +6,10 @@ if (!isset($_SESSION)) {
 <?php require_once HEADER ?>
 <main class="main-support">
     <div id="supportHeader">
+        <?php if(isset($_SESSION['message'])):?>
+            <p style="color: #0066ff;"><?php echo $_SESSION['message']?>
+            <?php unset($_SESSION['message']); ?>
+        <?php endif;?>
         <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
             <h1>Contáctanos</h1>
             <h3>Bienvenido a nuestra página de contacto</h3>
@@ -72,7 +76,7 @@ if (!isset($_SESSION)) {
                                     </div>
                                 </td>
                             <?php else: ?>
-                                <td><?php echo $request['userId']; ?></td>
+                                <td><?php echo $request['userId']; /*$user->getUserName()*/  ?></td>
                                 <td><?php echo html_entity_decode($request['subject'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><?php echo html_entity_decode($request['description'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><?php echo $request['priority']; ?></td>
@@ -80,11 +84,11 @@ if (!isset($_SESSION)) {
                                 <td><?php echo ($request['requestStatus'] == 0) ? 'Pendiente' : 'Resuelta'; ?></td>
                                 <td>
                                     <?php if($request['requestStatus'] == 0): ?>
-                                        <a href="index.php?c=support&f=form_response&requestId=<?php echo $request['requestId']; ?>">
+                                        <a class="a-support" href="index.php?c=support&f=form_response&requestId=<?php echo $request['requestId']; ?>">
                                             Responder
                                         </a>
                                     <?php else: ?>
-                                        <a href="index.php?c=support&f=form_response&requestId=<?php echo $request['requestId']; ?>">
+                                        <a class="a-support" href="index.php?c=support&f=form_response&requestId=<?php echo $request['requestId']; ?>">
                                             Actualizar respuesta
                                         </a>
                                     <?php endif; ?>
