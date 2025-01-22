@@ -4,20 +4,22 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    margin: 30px auto; /* Ajusta este valor para reducir la distancia desde la parte superior */
-    padding: 16px 16px; /* Reduce el relleno superior e inferior */
+    margin: 20px auto;
+    padding: 16px 16px;
     background-color: #ffffff;
     border: 1px solid #ececec;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    min-height: 80vh; /* Para asegurarse de que ocupe un poco más de la mitad de la pantalla */
-    justify-content: center; /* Centra el contenido */
+    min-height: 80vh;
+    justify-content: center;
+    align-items: center; /* Centrado horizontal */
 }
 
 .main {
     width: 100%;
     display: flex;
+    justify-content: center; /* Centrado horizontal */
     margin: auto;
 }
 
@@ -56,17 +58,23 @@
 .actions {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     margin-top: 30px;
 }
-
-/* Botón genérico */
-
 
 /* Botón de actualizar */
 .btn-primary {
     background-color: #0066ff;
     color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    max-width: 350px; /* Limita el tamaño máximo del botón */
 }
 
 .btn-primary:hover {
@@ -78,6 +86,14 @@
 .btn-danger {
     background-color: #ff4444;
     color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
 }
 
 .btn-danger:hover {
@@ -85,7 +101,59 @@
     box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
 }
 
-/* Estilos generales para el formulario */
+/* Estilos para los inputs, textareas y selects */
+.form-input, 
+.form-textarea, 
+.form-select {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1rem;
+    padding: 8px 10px;
+    border: 1px solid #9CA3AF;
+    border-radius: 5px;
+    font-family: system-ui, 'Segoe UI';
+    margin-bottom: 20px;
+    max-width: 350px; /* Limita el tamaño máximo del input */
+}
 
+/* Páginas de Login y Register */
+.login-form, .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center; /* Centrado de los inputs */
+}
 
-/* Estilos para los títulos y textos del formulario */
+/* Estilo para las etiquetas de los formularios */
+.form-label {
+    font-size: 1rem;
+    color: #464853;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Estilos para el texto del enlace */
+form p {
+    font-size: 1rem;
+    color: #464853;
+    text-align: center;
+}
+
+form p a {
+    color: #0066ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form p a:hover {
+    text-decoration: underline;
+}
