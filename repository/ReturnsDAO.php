@@ -15,8 +15,8 @@ class ReturnsDAO
     public function insertReturnRequest($return)
     {
         try {
-            $script = "INSERT INTO returns (requestDate, purchaseDate ,invoiceCode, productStatus, productCode, description, requestStatus, status) 
-            VALUES (?,?,?,?,?,?,?,?)";
+            $script = "INSERT INTO returns ( requestDate, purchaseDate ,invoiceCode, productStatus, productCode, description, requestStatus, status, userId) 
+            VALUES (?,?,?,?,?,?,?,?, ?)";
 
             $stmt = $this->connection->prepare($script);
 
@@ -28,9 +28,8 @@ class ReturnsDAO
             $stmt->bindParam(6, $return->getDescription(), PDO::PARAM_STR);
             $stmt->bindParam(7, $return->getRequestStatus(), PDO::PARAM_INT);
             $stmt->bindParam(8, $return->getStatus(), PDO::PARAM_INT);
-            /*             
-            $stmt->bindParam(':userId', $return->getUserId(), PDO::PARAM_INT); 
-            */
+            $stmt->bindParam(9, $return->getUserId(), PDO::PARAM_INT); 
+
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Fail insertReturnRequest: " . $e->getMessage(), 0);
@@ -65,13 +64,13 @@ class ReturnsDAO
         }
     }
 
-    public function searchReturnsRequestById($returnId)
+    public function searchReturnsRequestById($userId)
     {
         try {
             /* $script = "SELECT * FROM returns WHERE returnId = :userId"; */
-            $script = "SELECT * FROM returns WHERE status = 1 ORDER BY requestDate ASC";
+            $script = "SELECT * FROM returns WHERE status = 1 AND userId = :userId ORDER BY requestDate DESC";
             $stmt = $this->connection->prepare($script);
-            /* $stmt->bindParam(":userId", $returnId, PDO::PARAM_INT); */
+            $stmt->bindParam(":userId", $userId, PDO::PARAM_INT);
             $stmt->execute();
             $returns = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

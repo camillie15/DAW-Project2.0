@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'model/User.php';
 require_once 'model/Returns.php';
 require_once 'repository/ReturnsDAO.php';
 class ReturnsController
@@ -9,6 +9,7 @@ class ReturnsController
 
     public function __construct()
     {
+        session_start();
         $this->returnRepository = new ReturnsDAO();
     }
 
@@ -40,10 +41,8 @@ class ReturnsController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 //InsertId of user Logged
-                /* $userId = $_SESSION['userLogged']->userId; */
+                $userId = $_SESSION['userLogged']->getIdUser();    
 
-                /* TestIdUser */
-                $userId = 10;
                 $currentDate = new DateTime('NOW');
                 
                 $return = new Returns();
@@ -68,9 +67,10 @@ class ReturnsController
     public function list_client_view()
     {
         $this->returnToHome(1);
+        $userId = $_SESSION['userLogged']->getIdUser();    
         $title = "Historial de peticiones de devolucion";
         $returns = [];
-        $returns = $this->returnRepository->searchReturnsRequestById(0);
+        $returns = $this->returnRepository->searchReturnsRequestById($userId);
         require_once 'view/return/return.list.php';
     }
 
@@ -167,7 +167,7 @@ class ReturnsController
      */
     private function returnToHome($rol)
     {
-        $rolUser = 1; //Here will go userRol of session created
+        $rolUser = $_SESSION['userLogged']->getUserRole(); //Here will go userRol of session created
         if ($rol !== $rolUser) {
             header("location: index.php");
             exit();
@@ -188,7 +188,7 @@ class ReturnsController
     private function createReturnObject($currentDate, $returnId, $userId)
     {
         $return = new Returns();
-        $return->setReturnId($userId);
+        $return->setReturnId($returnId);
         $return->setUserId($userId);
         $return->setRequestDate($currentDate !=null ? $currentDate->format('Y-m-d H:i:s') : null);
         $return->setPurchaseDate(htmlentities($_POST['purchase_date']));
