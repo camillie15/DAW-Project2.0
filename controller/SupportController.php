@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'model/User.php';
 
 date_default_timezone_set('America/Guayaquil');
 require_once 'model/SupportRequest.php';
@@ -12,24 +12,25 @@ class SupportController{
     private $supportResponseDAO;
 
     public function __construct(){
+        session_start();
         $this->supportRequestDAO = new SupportRequestDAO();
         $this->supportResponseDAO = new SupportResponseDAO();
     }
 
 
     private function checkRole($rol) {
-        if (!isset($_SESSION['rol']) || $_SESSION['rol'] != $rol) {
+        if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']->getUserRole() != $rol) {
             Header("Location: index.php");
             exit();
         }
-        
     }
 
     public function show_requests(){
-        $_SESSION['rol'] = 1;
-        if($_SESSION['rol'] == 1){
-            $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['rol']);
-        }else if($_SESSION['rol'] == 3){
+        $userRol = $_SESSION['userLogged']->getUserRole(); 
+        error_log($userRol);
+        if($userRol == 1){
+            $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['userLogged']->getIdUser());
+        }else if($userRol == 3){
             $supportRequests = $this->supportResponseDAO->getSupportRequests();
         }else{
             Header("Location: index.php");
@@ -103,8 +104,7 @@ class SupportController{
     
     public function setDataRequest() {
         $supportRequest = new SupportRequest();
-        //$supportRequest->userId = $_SESSION['user'];
-        $supportRequest->userId = 1;
+        $supportRequest->userId = $_SESSION['userLogged']->getIdUser();
         $supportRequest->language = htmlentities($_POST['language']);
         $supportRequest->subject = htmlentities($_POST['subject']);
         $supportRequest->description = htmlentities($_POST['description']);
@@ -152,8 +152,7 @@ class SupportController{
     public function setDataResponse() {
         $supportResponse = new SupportResponse();
         $supportResponse->requestId = htmlentities($_POST['requestId']);
-        //$supportResponse->userId = $_SESSION['user'];
-        $supportResponse->userId = 1;
+        $supportResponse->userId = $_SESSION['userLogged']->getIdUser();
         $supportResponse->responseDate = (new DateTime('NOW'))->format('Y-m-d H:i:s');
         $supportResponse->response = htmlentities($_POST['response']);
         return $supportResponse;
