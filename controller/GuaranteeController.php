@@ -40,6 +40,12 @@ class GuaranteeController
     {
         $this->checkRole(self::ROLE_CLIENT);
         $guaranteeReasons = $this->guaranteeReasonDAO->getGuaranteeReason();
+
+        $error = isset($_SESSION['error']) ? $_SESSION['error'] : [];
+        $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+        unset($_SESSION['error']);
+        unset($_SESSION['form_data']);
+
         require_once VGUARANTEE . 'new.php';
     }
 
@@ -52,7 +58,7 @@ class GuaranteeController
     }
 
     public function listGuarantees()
-    {   
+    {
         $rol = $_SESSION['userLogged']->getUserRole();
 
         if ($rol == self::ROLE_CLIENT) {
@@ -85,6 +91,12 @@ class GuaranteeController
         $this->checkRole(self::ROLE_CLIENT);
         $guaranteeId = $_GET['id'];
         $guarantee = $this->guaranteeDAO->getGuaranteeById($guaranteeId);
+        $guaranteeReasons = $this->guaranteeReasonDAO->getGuaranteeReason();
+        $error = isset($_SESSION['error']) ? $_SESSION['error'] : [];
+        $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+        unset($_SESSION['error']);
+        unset($_SESSION['form_data']);
+
         if ($guarantee) {
             require_once VGUARANTEE . 'edit.php';
         } else {
@@ -92,6 +104,7 @@ class GuaranteeController
             require_once 'view/statics/error.php';
         }
     }
+
 
     public function delete()
     {
@@ -108,23 +121,46 @@ class GuaranteeController
         $guaranteeData = $this->guaranteeDAO->getGuaranteeById($guaranteeId);
 
         if ($guaranteeData) {
+            $error = [];
+            unset($_SESSION['error']);
+            unset($_SESSION['form_data']);
+
+            $formData = [
+                'productCode' => trim($_POST['productCode']),
+                'invoiceCode' => trim($_POST['invoiceCode']),
+                'description' => trim($_POST['description']),
+                'purchaseDate' => trim($_POST['purchaseDate']),
+                'warrantyReasonId' => trim($_POST['warrantyReasonId']),
+            ];
+
+            if (empty($formData['productCode'])) {
+                $error[] = "El código del producto es requerido.";
+            }
+            if (empty($formData['invoiceCode'])) {
+                $error[] = "El código de factura es requerido.";
+            }
+            if (empty($formData['description'])) {
+                $error[] = "La descripción es requerida.";
+            }
+
+            $_SESSION['form_data'] = $formData;
+            if (count($error) > 0) {
+                $_SESSION['error'] = $error;
+                header("Location: index.php?c=guarantee&f=editForm&id=$guaranteeId");
+                exit();
+            }
+
             $guarantee = new Guarantee();
             $guarantee->setGuaranteeId($guaranteeData['guaranteeId']);
             $guarantee->setUserId($guaranteeData['userId']);
             $guarantee->setRequestDate(new DateTime($guaranteeData['requestDate']));
-            $guarantee->setPurchaseDate($guaranteeData['purchaseDate']);
-            $guarantee->setWarrantyReasonId($guaranteeData['warrantyReasonId']);
-            $guarantee->setProductCode($guaranteeData['productCode']);
-            $guarantee->setInvoiceCode($guaranteeData['invoiceCode']);
-            $guarantee->setDescription($guaranteeData['description']);
+            $guarantee->setPurchaseDate(htmlentities($formData['purchaseDate']));
+            $guarantee->setWarrantyReasonId(htmlentities($formData['warrantyReasonId']));
+            $guarantee->setProductCode(htmlentities($formData['productCode']));
+            $guarantee->setInvoiceCode(htmlentities($formData['invoiceCode']));
+            $guarantee->setDescription(htmlentities($formData['description']));
             $guarantee->setRequestStatus($guaranteeData['requestStatus']);
 
-            $guarantee->setWarrantyReasonId(htmlentities($_POST['warrantyReasonId']));
-            $guarantee->setProductCode(htmlentities($_POST['productCode']));
-            $guarantee->setInvoiceCode(htmlentities($_POST['invoiceCode']));
-            $guarantee->setDescription(htmlentities($_POST['description']));
-            $guarantee->setPurchaseDate(htmlentities($_POST['purchaseDate']));
-            $guarantee->setRequestStatus(htmlentities($_POST['requestStatus']));
             $this->guaranteeDAO->update($guarantee);
 
             header("Location: index.php?c=guarantee&f=listGuarantees");
@@ -145,7 +181,6 @@ class GuaranteeController
 
         header("Location: index.php?c=guarantee&f=listGuarantees");
     }
-
 
     private function getRequestStatusName($statusId)
     {
@@ -191,12 +226,40 @@ class GuaranteeController
 
     private function setGuaranteeProperties($guarantee, $data)
     {
-        $guarantee->setPurchaseDate(htmlentities($data['purchaseDate']));
-        $guarantee->setWarrantyReasonId(htmlentities($data['warrantyReasonId']));
-        $guarantee->setProductCode(htmlentities($data['productCode']));
-        $guarantee->setInvoiceCode(htmlentities($data['invoiceCode']));
-        $guarantee->setDescription(htmlentities($data['description']));
-        $guarantee->setRequestStatus(htmlentities($data['requestStatus']));
+        $error = [];
+        unset($_SESSION['error']);
+        unset($_SESSION['form_data']);
+
+        $formData = [
+            'productCode' => trim($data['productCode']),
+            'invoiceCode' => trim($data['invoiceCode']),
+            'description' => trim($data['description']),
+            'purchaseDate' => trim($data['purchaseDate']),
+            'warrantyReasonId' => trim($data['warrantyReasonId']),
+        ];
+
+        if (empty($formData['productCode'])) {
+            $error[] = "El código del producto es requerido.";
+        }
+        if (empty($formData['invoiceCode'])) {
+            $error[] = "El código de factura es requerido.";
+        }
+        if (empty($formData['description'])) {
+            $error[] = "La descripción es requerida.";
+        }
+
+        $_SESSION['form_data'] = $formData;
+        if (count($error) > 0) {
+            $_SESSION['error'] = $error;
+            header("Location: index.php?c=guarantee&f=insertForm");
+            exit();
+        }
+
+        $guarantee->setPurchaseDate(htmlentities($formData['purchaseDate']));
+        $guarantee->setWarrantyReasonId(htmlentities($formData['warrantyReasonId']));
+        $guarantee->setProductCode(htmlentities($formData['productCode']));
+        $guarantee->setInvoiceCode(htmlentities($formData['invoiceCode']));
+        $guarantee->setDescription(htmlentities($formData['description']));
     }
 }
 ?>

@@ -42,7 +42,7 @@
                                 <td><?php echo htmlspecialchars($guarantee['productCode']); ?></td>
                                 <td><?php echo htmlspecialchars($guarantee['invoiceCode']); ?></td>
                                 <td><?php echo htmlspecialchars($guarantee['description']); ?></td>
-    
+
                                 <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
                                     <td><?php echo htmlspecialchars($guarantee['requestStatusName']); ?></td>
                                 <?php elseif ($_SESSION['userLogged']->getUserRole() == 2): ?>
@@ -64,16 +64,15 @@
                                         </form>
                                     </td>
                                 <?php endif; ?>
-    
+
                                 <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
                                     <td>
                                         <div class="actions-garantee">
                                             <a href="index.php?c=guarantee&f=editForm&id=<?php echo htmlspecialchars($guarantee['guaranteeId']); ?>"
                                                 class="btn-guarantee">Editar</a>
-    
-                                            <a href="index.php?c=guarantee&f=delete&id=<?php echo htmlspecialchars($guarantee['guaranteeId']); ?>"
-                                                class="btn-guarantee"
-                                                onclick="return confirm('¿Estás seguro de eliminar esta solicitud?')">Eliminar</a>
+
+                                            <button class="btn-guarantee btn-delete"
+                                                data-id="<?php echo htmlspecialchars($guarantee['guaranteeId']); ?>">Eliminar</button>
                                         </div>
                                     </td>
                                 <?php elseif ($_SESSION['userLogged']->getUserRole() == 2): ?>
@@ -87,5 +86,33 @@
         </section>
     </section>
 </main>
+
+<div id="deleteModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Confirmar Eliminación</h3>
+        <p>¿Estás seguro de que deseas eliminar esta solicitud?</p>
+        <div class="modal-actions">
+            <button id="cancelDelete" class="btn-cancel">Cancelar</button>
+            <a d="confirmDelete" class="btn-confirm" href="index.php?c=guarantee&f=delete&id=<?php echo htmlspecialchars($guarantee['guaranteeId']); ?>">Eliminar</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function () {
+            const guaranteeId = this.dataset.id;
+            const modal = document.getElementById('deleteModal');
+            const confirmDelete = document.getElementById('confirmDelete');
+            modal.style.display = 'block';
+            confirmDelete.href = `index.php?c=guarantee&f=delete&id=${guaranteeId}`;
+        });
+    });
+
+    document.getElementById('cancelDelete').addEventListener('click', function () {
+        const modal = document.getElementById('deleteModal');
+        modal.style.display = 'none';
+    });
+</script>
 
 <?php require_once FOOTER; ?>
