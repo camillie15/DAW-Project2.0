@@ -1,23 +1,24 @@
 <?php
 require_once 'model/User.php';
 
-session_start();
-
 date_default_timezone_set('America/Guayaquil');
 require_once 'model/SupportRequest.php';
 require_once 'model/SupportResponse.php';
 require_once 'repository/SupportRequestDAO.php';
 require_once 'repository/SupportResponseDAO.php';
+require_once 'repository/UserDao.php';
 
 class SupportController{
     private $supportRequestDAO;
     private $supportResponseDAO;
+    private $userDao;
 
     public function __construct(){
+        session_start();
         $this->supportRequestDAO = new SupportRequestDAO();
         $this->supportResponseDAO = new SupportResponseDAO();
+        $this->userDao = new UserDao();
     }
-
 
     private function checkRole($rol) {
         if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']->getUserRole() != $rol) {
@@ -32,6 +33,7 @@ class SupportController{
         if($userRol == 1){
             $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['userLogged']->getIdUser());
         }else if($userRol == 3){
+            $user = $this->userDao->getUserById($_SESSION['userLogged']->getIdUser());
             $supportRequests = $this->supportResponseDAO->getSupportRequests();
         }else{
             Header("Location: index.php");
@@ -51,8 +53,11 @@ class SupportController{
         $this->checkRole(1);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $supportRequest = $this->setDataRequest();
-            $this->supportRequestDAO->insertSupportRequest($supportRequest);
-            header("Location: index.php?c=support&f=show_requests");
+            if($supportRequest != null){
+                $this->supportRequestDAO->insertSupportRequest($supportRequest);
+                $_SESSION['message'] = "Solicitud creada exitosamente";    
+            } 
+            header("Location: index.php?c=support&f=show_requests");           
         }
     }
 
@@ -67,8 +72,11 @@ class SupportController{
         $this->checkRole(1);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $supportRequest = $this->setDataRequest();
-            $supportRequest->requestId = htmlentities($_POST['requestId']);
-            $this->supportRequestDAO->updateSupportRequest($supportRequest);
+            if($supportRequest != null){
+                $supportRequest->requestId = htmlentities($_POST['requestId']);
+                $this->supportRequestDAO->updateSupportRequest($supportRequest);
+                $_SESSION['message'] = "Solicitud actualizada exitosamente";
+            }
             header("Location: index.php?c=support&f=show_requests");
         }
     }
@@ -77,6 +85,7 @@ class SupportController{
         $this->checkRole(1);
         $requestId = htmlentities($_GET['requestId']);
         $this->supportRequestDAO->logicDeleteSupportRequest($requestId);
+        $_SESSION['message'] = "Solicitud eliminada exitosamente";
         header("Location: index.php?c=support&f=show_requests");
     }
 
@@ -107,12 +116,17 @@ class SupportController{
         $supportRequest = new SupportRequest();
         $supportRequest->userId = $_SESSION['userLogged']->getIdUser();
         $supportRequest->language = htmlentities($_POST['language']);
-        $supportRequest->subject = htmlentities($_POST['subject']);
-        $supportRequest->description = htmlentities($_POST['description']);
+        $supportRequest->subject = htmlentities(trim($_POST['subject']));
+        $supportRequest->description = htmlentities(trim($_POST['description']));
         $supportRequest->priority = htmlentities($_POST['priority']);
         $supportRequest->requestDate = (new DateTime('NOW'))->format('Y-m-d H:i:s');
         $supportRequest->requestStatus = 0;
         $supportRequest->status = 1;
+        if(empty(trim($_POST['subject'])) || empty(trim($_POST['description']))){
+            $_SESSION['message'] = "Datos incompletos para la solicitud";
+            return null;
+            exit();
+        }
         return $supportRequest;
     }
 
@@ -134,8 +148,11 @@ class SupportController{
         $this->checkRole(3);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $supportResponse = $this->setDataResponse();
-            $this->supportResponseDAO->insertSupportResponse($supportResponse);
-            $this->supportRequestDAO->updateRequestStatus($supportResponse->requestId);
+            if($supportResponse != null){
+                $this->supportResponseDAO->insertSupportResponse($supportResponse);
+                $this->supportRequestDAO->updateRequestStatus($supportResponse->requestId);
+                $_SESSION['message'] = "Respuesta creada exitosamente";
+            }
             header("Location: index.php?c=support&f=show_requests");
         }
     }
@@ -144,8 +161,11 @@ class SupportController{
         $this->checkRole(3);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $supportResponse = $this->setDataResponse();
-            $supportResponse->responseId = htmlentities($_POST['responseId']);
-            $this->supportResponseDAO->updateSupportResponse($supportResponse);
+            if($supportResponse != null){
+                $supportResponse->responseId = htmlentities($_POST['responseId']);
+                $this->supportResponseDAO->updateSupportResponse($supportResponse);
+                $_SESSION['message'] = "Respuesta actualizada exitosamente";
+            }
             header("Location: index.php?c=support&f=show_requests");
         }
     }
@@ -155,7 +175,12 @@ class SupportController{
         $supportResponse->requestId = htmlentities($_POST['requestId']);
         $supportResponse->userId = $_SESSION['userLogged']->getIdUser();
         $supportResponse->responseDate = (new DateTime('NOW'))->format('Y-m-d H:i:s');
-        $supportResponse->response = htmlentities($_POST['response']);
+        $supportResponse->response = htmlentities(trim($_POST['response']));
+        if(empty(htmlentities(trim($_POST['response'])))){
+            $_SESSION['message'] = "Datos incompletos para la respuesta";
+            return null;
+            exit();
+        }
         return $supportResponse;
     }
 

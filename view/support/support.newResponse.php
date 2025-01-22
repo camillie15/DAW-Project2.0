@@ -10,7 +10,7 @@
         <form action="index.php?c=support&f=create_response" method="POST">
         <input type="hidden" name="requestId" value="<?php echo htmlspecialchars($_GET['requestId']); ?>">
             <label class="label-bold" for="response">Respuesta</label>
-            <textarea name="response" id="response" maxlength="250"></textarea>
+            <textarea name="response" id="response" maxlength="250" required></textarea>
             <div class="div-buttons">
                 <input type="submit" value="Responder">
             </div>
