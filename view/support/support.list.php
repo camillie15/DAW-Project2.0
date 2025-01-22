@@ -76,7 +76,7 @@ if (!isset($_SESSION)) {
                                     </div>
                                 </td>
                             <?php else: ?>
-                                <td><?php echo $user->getUserName(); ?></td>
+                                <td><?php echo htmlentities($request['userName']); ?></td>
                                 <td><?php echo html_entity_decode($request['subject'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><?php echo html_entity_decode($request['description'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><?php echo $request['priority']; ?></td>
