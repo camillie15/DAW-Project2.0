@@ -13,6 +13,7 @@ define("VFAQ", "view/faq/faq.");
 
 // Conexión a la base de datos
 define("VSUPPORT", "view/support/support.");
+define("VGUARANTEE", "view/guarantee/guarantee.");
 
 // conexion bb
 define("DBNAME", "resolveit");
