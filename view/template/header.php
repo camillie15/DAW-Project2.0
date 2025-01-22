@@ -25,6 +25,7 @@ if ($rol < 1 || $rol > 3) {
   <title>ResolveIT</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/returnStyle.css">
+  <link rel="stylesheet" href="assets/css/guaranteeStyle.css">
   <link rel="stylesheet" href="assets/css/perfilStyle.css">
   <link rel="stylesheet" href="assets/css/faqStyle.css">
   <link rel="stylesheet" href="assets/css/faqEditStyle.css">
@@ -60,7 +61,7 @@ if ($rol < 1 || $rol > 3) {
   ?>
     <nav class="nav-links">
       <a href="index.php?c=returns&f=list_view">Peticiones de Devolucion</a>
-      <a href="#">Peticiones de Garantia</a>
+      <a href="index.php?c=guarantee&f=listGuarantees">Peticiones de Garantia</a>
     </nav>
   <?php
   }
