@@ -167,6 +167,10 @@ class ReturnsController
      */
     private function returnToHome($rol)
     {
+        if(!isset($_SESSION['userLogged'])) {
+            header("location: index.php?c=user&f=login");
+            exit();
+        }
         $rolUser = $_SESSION['userLogged']->getUserRole(); //Here will go userRol of session created
         if ($rol !== $rolUser) {
             header("location: index.php");
