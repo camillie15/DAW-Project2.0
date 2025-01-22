@@ -33,8 +33,13 @@ class SupportController{
         if($userRol == 1){
             $supportRequests = $this->supportRequestDAO->getSupportRequests($_SESSION['userLogged']->getIdUser());
         }else if($userRol == 3){
-            $user = $this->userDao->getUserById($_SESSION['userLogged']->getIdUser());
             $supportRequests = $this->supportResponseDAO->getSupportRequests();
+            foreach ($supportRequests as &$request) {
+                $user = $this->userDao->getUserById($request['userId']);
+                
+                if ($user) {
+                    $request['userName'] = $user['userName'];                }
+            }
         }else{
             Header("Location: index.php");
             exit();
