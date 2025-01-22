@@ -11,14 +11,14 @@ if (!isset($_SESSION)) {
             <?php unset($_SESSION['message']); ?>
         <?php endif;?>
         <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>
-            <h1>Contáctanos</h1>
+            <h1 class="title">Contáctanos</h1>
             <h3>Bienvenido a nuestra página de contacto</h3>
             <p>Aquí podrás crear una nueva solicitud de soporte, ver el historial de tus solicitudes anteriores y 
                 ponerte en contacto con nosotros de la manera conveniente</p>
             <a href="index.php?c=support&f=form_create_request" class="btn-support">Nueva Solicitud</a>
             <h4>Solicitudes registradas:</h4>
         <?php else:?>
-            <h2>Solicitudes de contacto</h2>
+            <h2 class="title">Solicitudes de contacto</h2>
         <?php endif; ?>
     </div>
     <div>
@@ -76,7 +76,7 @@ if (!isset($_SESSION)) {
                                     </div>
                                 </td>
                             <?php else: ?>
-                                <td><?php echo $request['userId']; /*$user->getUserName()*/  ?></td>
+                                <td><?php echo $user->getUserName(); ?></td>
                                 <td><?php echo html_entity_decode($request['subject'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><?php echo html_entity_decode($request['description'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><?php echo $request['priority']; ?></td>

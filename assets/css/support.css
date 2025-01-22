@@ -1,5 +1,6 @@
 .main-support {
-    width: 90%;
+    padding-top: 20px;
+    width: 70%;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -34,7 +35,7 @@
     }
     
     & td:nth-child(3), th:nth-child(3) {
-        width: 45%;
+        width: 35%;
     }
     
     & td:nth-child(1), td:nth-child(2), td:nth-child(4), td:nth-child(5), 
@@ -89,10 +90,16 @@
     }
 }
 
+.title{
+    color: #2f32ec;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .div-form {
     box-sizing: border-box;
     margin: auto;
-    width: 60%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     padding: 20px;
