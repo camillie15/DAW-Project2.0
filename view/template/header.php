@@ -23,20 +23,20 @@ if ($rol < 1 || $rol > 3) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResolveIT</title>
-  <link rel="stylesheet" href="<?= dirname(__DIR__) . '/../assets/css/style.css' ?>">
-  <link rel="stylesheet" href="<?= dirname(__DIR__) . '/../assets/css/returnStyle.css' ?>">
-  <link rel="stylesheet" href="<?= dirname(__DIR__) . '/../assets/css/guaranteeStyle.css' ?>">
-  <link rel="stylesheet" href="<?= dirname(__DIR__) . '/../assets/css/perfilStyle.css' ?>">
-  <link rel="stylesheet" href="<?= dirname(__DIR__) . '/../assets/css/faqStyle.css' ?>">
-  <link rel="stylesheet" href="<?= dirname(__DIR__) . '/../assets/css/faqEditStyle.css' ?>">
-  <link rel="stylesheet" href="<?= dirname(__DIR__) . '/../assets/css/support.css' ?>">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/returnStyle.css">
+  <link rel="stylesheet" href="assets/css/guaranteeStyle.css">
+  <link rel="stylesheet" href="assets/css/perfilStyle.css">
+  <link rel="stylesheet" href="assets/css/faqStyle.css">
+  <link rel="stylesheet" href="assets/css/faqEditStyle.css">
+  <link rel="stylesheet" href="assets/css/support.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 
 <header>
   <a href="index.php" class="logo-div" style="color: #000;">
-    <img class="logo-img" src="<?= dirname(__DIR__) . '/../assets/img/logo.png' ?>" alt="Logo empresa" width="50" height="50">
+    <img class="logo-img" src="assets/img/logo.png" alt="Logo empresa" width="50" height="50">
     <h1 id="logo-name">ResolveIT</h1>
   </a>
 

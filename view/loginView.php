@@ -5,13 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ResolveIT</title>
-    <link rel="stylesheet" href="assets/css/userStyle.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/userStyle.css">
 </head>
 
 <main class="main">
-
-
     <!-- Botones de login y registro -->
     <div class="profile-container">
         <!-- Logo dentro del main -->
