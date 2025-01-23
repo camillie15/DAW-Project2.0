@@ -8,7 +8,7 @@ define("HEADER", __DIR__ . '/../view/template/header.php');
 define("FOOTER", __DIR__ . '/../view/template/footer.php');
 
 // Ruta del módulo de vistas de devolución
-define("VRETURNS", "view/return/return.");
-define("VFAQ", "view/faq/faq.");
-define("VSUPPORT", "view/support/support.");
-define("VGUARANTEE", "view/guarantee/guarantee.");
+define("VRETURNS", __DIR__ . "/../view/return/return.");
+define("VFAQ", __DIR__ . "/../view/faq/faq.");
+define("VSUPPORT", __DIR__ . "/../view/support/support.");
+define("VGUARANTEE", __DIR__ . "/../view/guarantee/guarantee.");
