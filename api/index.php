@@ -1,6 +1,6 @@
 <?php
 // FrontController
-require_once './../conf/ConfigPaths.php';
+require_once __DIR__ . '/../conf/ConfigPaths.php';
 
 // Leer parámetros de la URL
 $controlador = (!empty($_REQUEST['c'])) ? htmlentities($_REQUEST['c']) : CONTROLADOR_PRINCIPAL;
