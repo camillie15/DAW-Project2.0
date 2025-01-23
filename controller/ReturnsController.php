@@ -41,14 +41,17 @@ class ReturnsController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 //InsertId of user Logged
-                $userId = $_SESSION['userLogged']->getIdUser();    
+                $userId = $_SESSION['userLogged']->getIdUser();
 
                 $currentDate = new DateTime('NOW');
-                
+
                 $return = new Returns();
                 $return = $this->createReturnObject($currentDate, null, $userId);
-                
-                $result = $this->returnRepository->insertReturnRequest($return);
+
+                //$result = $this->returnRepository->insertReturnRequest($return);
+
+                $result =  $return != null ? $this->returnRepository->insertReturnRequest($return) : false;
+
                 if ($result) {
                     $this->redirectWithMessage(true, "Solicitud enviada con exito", "index.php?c=returns&f=index");
                 } else {
@@ -67,7 +70,7 @@ class ReturnsController
     public function list_client_view()
     {
         $this->returnToHome(1);
-        $userId = $_SESSION['userLogged']->getIdUser();    
+        $userId = $_SESSION['userLogged']->getIdUser();
         $title = "Historial de peticiones de devolucion";
         $returns = [];
         $returns = $this->returnRepository->searchReturnsRequestById($userId);
@@ -108,7 +111,7 @@ class ReturnsController
                 $return = new Returns();
 
                 $return = $this->createReturnObject(null, $id, null);
-                $result = $this->returnRepository->updateReturnRequest($id, $return);
+                $result = $return != null ?  $this->returnRepository->updateReturnRequest($id, $return) : false;
                 if ($result) {
                     $this->redirectWithMessage(true, "Solicitud actualizada con exito", "index.php?c=returns&f=list_client_view");
                 } else {
@@ -167,7 +170,7 @@ class ReturnsController
      */
     private function returnToHome($rol)
     {
-        if(!isset($_SESSION['userLogged'])) {
+        if (!isset($_SESSION['userLogged'])) {
             header("location: index.php?c=user&f=login");
             exit();
         }
@@ -194,14 +197,30 @@ class ReturnsController
         $return = new Returns();
         $return->setReturnId($returnId);
         $return->setUserId($userId);
-        $return->setRequestDate($currentDate !=null ? $currentDate->format('Y-m-d H:i:s') : null);
-        $return->setPurchaseDate(htmlentities($_POST['purchase_date']));
-        $return->setProductStatus(htmlentities($_POST['product_status']));
-        $return->setProductCode(htmlentities($_POST['product_code']));
-        $return->setInvoiceCode(htmlentities($_POST['invoice_code']));
-        $return->setDescription(htmlentities($_POST['description']));
+        $return->setRequestDate($currentDate != null ? $currentDate->format('Y-m-d H:i:s') : null);
         $return->setRequestStatus(0);
         $return->setStatus(1);
+        if (!$this->checkEntryNull()) {
+            $return->setPurchaseDate(htmlentities($_POST['purchase_date']));
+            $return->setProductStatus(htmlentities($_POST['product_status']));
+            $return->setProductCode(htmlentities($_POST['product_code']));
+            $return->setInvoiceCode(htmlentities($_POST['invoice_code']));
+            $return->setDescription(htmlentities($_POST['description']));
+        } else {
+            $return = null;
+        }
         return $return;
+    }
+
+    private function checkEntryNull(){
+        $compare = [$_POST['purchase_date'], $_POST['product_status'], $_POST['product_code'], $_POST['invoice_code'], $_POST['description']];
+        $flag = false;
+        foreach ($compare as $value) {
+            if(trim($value) == null){
+                $flag = true;
+                break;
+            }
+        }
+        return $flag;
     }
 }
