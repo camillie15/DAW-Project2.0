@@ -8,7 +8,7 @@
             //Logica de retorno al login
         } */
         //$this->verifyLogin();
-       require 'view/homeView.php';
+       require __DIR__ . '/../view/homeView.php';
     }
 
     private function verifyLogin(){
