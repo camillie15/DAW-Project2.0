@@ -1,8 +1,8 @@
 <?php
 // controllers/UserController.php
 
-require_once 'model/User.php';
-require_once 'repository/UserDAO.php';
+require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../repository/UserDAO.php';
 
 class UserController
 {
@@ -16,7 +16,7 @@ class UserController
     public function index()
     {
         $this->verifyLogin();
-        require_once 'view/loginView.php';
+        require_once __DIR__ . '/../view/loginView.php';
     }
 
     public function perfil()

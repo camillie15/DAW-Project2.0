@@ -1,5 +1,5 @@
 <?php
-require_once 'model/User.php';
+require_once(__DIR__ . '/../../model/User.php');
 if (!isset($_SESSION)) session_start();
 // Verificar si el usuario está logueado
 if (!empty($_SESSION['userLogged'])) {
@@ -23,13 +23,13 @@ if ($rol < 1 || $rol > 3) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResolveIT</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/returnStyle.css">
-  <link rel="stylesheet" href="assets/css/guaranteeStyle.css">
-  <link rel="stylesheet" href="assets/css/perfilStyle.css">
-  <link rel="stylesheet" href="assets/css/faqStyle.css">
-  <link rel="stylesheet" href="assets/css/faqEditStyle.css">
-  <link rel="stylesheet" href="assets/css/support.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/returnStyle.css">
+  <link rel="stylesheet" href="/assets/css/guaranteeStyle.css">
+  <link rel="stylesheet" href="/assets/css/perfilStyle.css">
+  <link rel="stylesheet" href="/assets/css/faqStyle.css">
+  <link rel="stylesheet" href="/assets/css/faqEditStyle.css">
+  <link rel="stylesheet" href="/assets/css/support.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 

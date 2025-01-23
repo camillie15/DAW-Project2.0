@@ -1,8 +1,8 @@
 <?php
 // repository/UserDAO.php
 
-require_once 'model/User.php';
-require_once 'conf/Connection.php';
+require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../conf/Connection.php';
 
 class UserDAO
 {
