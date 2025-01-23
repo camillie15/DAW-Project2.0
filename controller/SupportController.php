@@ -59,8 +59,9 @@ class SupportController{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $supportRequest = $this->setDataRequest();
             if($supportRequest != null){
-                $this->supportRequestDAO->insertSupportRequest($supportRequest);
-                $_SESSION['message'] = "Solicitud creada exitosamente";    
+                if($this->supportRequestDAO->insertSupportRequest($supportRequest)) {
+                    $_SESSION['message'] = "Solicitud creada exitosamente";    
+                }
             } 
             header("Location: index.php?c=support&f=show_requests");           
         }

@@ -12,7 +12,7 @@ class SupportRequestDAO{
 
     public function insertSupportRequest($supportRequest) {
         try {
-            $sql = "insert into supportrequests (userId, requestDate, subject, description, priority, requestStatus, status, language) 
+            $sql = "insert into supportRequests (userId, requestDate, subject, description, priority, requestStatus, status, language) 
                     VALUES (:userId, :requestDate, :subject, :description, :priority, :requestStatus, :status, :language)";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindValue(":userId", $supportRequest->userId, PDO::PARAM_INT);
@@ -34,7 +34,7 @@ class SupportRequestDAO{
 
     public function getSupportRequests($userId){
         try{
-            $sql = "select * FROM supportrequests WHERE userId = :userId and status = 1";
+            $sql = "select * FROM supportRequests WHERE userId = :userId and status = 1";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(":userId", $userId, PDO::PARAM_INT);
             $stmt->execute();
@@ -48,7 +48,7 @@ class SupportRequestDAO{
 
     public function getSupportRequestById($requestId){
         try{
-            $sql = "select * FROM supportrequests WHERE requestId = :requestId";
+            $sql = "select * FROM supportRequests WHERE requestId = :requestId";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(":requestId", $requestId, PDO::PARAM_INT);
             $stmt->execute();
@@ -62,7 +62,7 @@ class SupportRequestDAO{
 
     public function updateSupportRequest($supportRequest){
         try{
-            $sql = "update supportrequests set subject = :subject, description = :description, 
+            $sql = "update supportRequests set subject = :subject, description = :description, 
             priority = :priority, language = :language WHERE requestId = :requestId";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindValue(":subject", $supportRequest->subject, PDO::PARAM_STR);
@@ -80,7 +80,7 @@ class SupportRequestDAO{
 
     public function updateRequestStatus($requestId){
         try{
-            $sql = "update supportrequests set requestStatus = 1 WHERE requestId = :requestId";
+            $sql = "update supportRequests set requestStatus = 1 WHERE requestId = :requestId";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(":requestId", $requestId, PDO::PARAM_INT);
             $stmt->execute();
@@ -93,7 +93,7 @@ class SupportRequestDAO{
 
     public function logicDeleteSupportRequest($requestId){
         try{
-            $sql = "update supportrequests set status = 0 WHERE requestId = :requestId";
+            $sql = "update supportRequests set status = 0 WHERE requestId = :requestId";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(":requestId", $requestId, PDO::PARAM_INT);
             $stmt->execute();
