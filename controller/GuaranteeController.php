@@ -3,7 +3,7 @@ require_once 'model/User.php';
 require_once 'model/Guarantee.php';
 require_once 'repository/GuaranteeDAO.php';
 require_once 'repository/GuaranteeReasonsDAO.php';
-require_once 'repository/UserDao.php';
+require_once 'repository/UserDAO.php';
 
 class GuaranteeController
 {

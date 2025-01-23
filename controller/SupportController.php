@@ -6,7 +6,7 @@ require_once 'model/SupportRequest.php';
 require_once 'model/SupportResponse.php';
 require_once 'repository/SupportRequestDAO.php';
 require_once 'repository/SupportResponseDAO.php';
-require_once 'repository/UserDao.php';
+require_once 'repository/UserDAO.php';
 
 class SupportController{
     private $supportRequestDAO;
@@ -17,7 +17,7 @@ class SupportController{
         session_start();
         $this->supportRequestDAO = new SupportRequestDAO();
         $this->supportResponseDAO = new SupportResponseDAO();
-        $this->userDao = new UserDao();
+        $this->userDao = new UserDAO();
     }
 
     private function checkRole($rol) {
