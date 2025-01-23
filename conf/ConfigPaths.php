@@ -10,7 +10,5 @@ define("FOOTER", 'view/template/footer.php');
 // Ruta del módulo de vistas de devolución
 define("VRETURNS", "view/return/return.");
 define("VFAQ", "view/faq/faq.");
-
-// Conexión a la base de datos
 define("VSUPPORT", "view/support/support.");
 define("VGUARANTEE", "view/guarantee/guarantee.");
