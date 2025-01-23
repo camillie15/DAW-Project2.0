@@ -47,7 +47,7 @@ class UserController
                 // Crear un nuevo objeto usuario con los nuevos datos
                 $user = new User($_SESSION['userLogged']->getIdUser(), $firstName, $lastName, $userName, $email, $password);
                 $user->setUserRole($_SESSION['userLogged']->getUserRole());
-             /*     $user->setStatus($_SESSION['userLogged']->getStatus()); */
+                /*     $user->setStatus($_SESSION['userLogged']->getStatus()); */
 
                 // Actualizar en la base de datos
                 $userDAO = new UserDAO();
@@ -56,12 +56,12 @@ class UserController
                     $_SESSION['userLogged'] = $user;
                     // Redirigir a la página de perfil para evitar el reenvío del formulario
                     header('Location: index.php?c=user&f=perfil');
-                     exit(); // Asegúrate de detener el script después de la redirección
+                    exit(); // Asegúrate de detener el script después de la redirección
                 } else {
                     echo "Error al actualizar los datos.";
                 }
             }
-        }else{
+        } else {
             header('Location: index.php?c=index&f=index');
             exit();
         }
@@ -105,31 +105,27 @@ class UserController
     public function processLogin()
     {
         $this->verifyLogin();
-        // Obtener los valores de userName y password desde el formulario
+
+        // Obtener los valores del formulario
         $userName = $_POST['userName'];
-        $password = $_POST['password'];  // Cambiado de contrasena a password
+        $password = $_POST['password'];
 
-        // Llamar al método login() pasando los dos parámetros esperados
+        // Instancia del DAO y verificación del login
         $userDAO = new UserDAO();
-        $user = $userDAO->login($userName, $password);  // Cambiado de contrasena a password
+        $user = $userDAO->login($userName, $password);
 
-        // Si el login es exitoso, redirigir o hacer lo necesario
         if ($user !== null) {
-            // Crear el objeto de usuario solo con idUser y userRole
-            /* $userSession = new User($user->getIdUser(), $user->getUserRole()); */
-
             // Guardar la información del usuario en la sesión
             $_SESSION['userLogged'] = $user;
-
-            // Redirigir a la página correspondiente
-            /*    require_once 'view/homeView.php'; */
             header("location:index.php");
             exit();
         } else {
-            // Si no se encontró el usuario, mostrar un mensaje de error
-            echo "Usuario o password incorrectos.";  // Cambiado de contrasena a password
+            // Enviar el mensaje de error a la vista sin redireccionar
+            $_SESSION['login_error'] = "Ingrese con datos correctos.";
+        header("location:index.php?c=user&f=login");
         }
     }
+
 
     // Método para mostrar el formulario de registro
     public function register()
