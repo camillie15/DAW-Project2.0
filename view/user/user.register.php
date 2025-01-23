@@ -5,17 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResolveIT - Register</title>
-  <link rel="stylesheet" href="assets/css/userStyle.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/userStyle.css">
 </head>
 
 <body>
   <main class="main">
     <div class="profile-container">
-      <h1 class="profile-title">Register</h1>
-      
-      <!-- Formulario de registro -->
-      <form method="POST" action="index.php?c=user&f=processRegister" class="form-container">
+      <h1>Register</h1>
+      <form method="POST" action="index.php?c=user&f=processRegister" class="form-container register-form">
         <label for="firstName" class="form-label">First Name</label>
         <input type="text" id="firstName" name="firstName" class="form-input" required>
 
@@ -33,11 +31,9 @@
 
         <button type="submit" class="btn btn-primary">Register</button>
       </form>
-
-      <p class="form-link">¿Ya tienes una cuenta? <a href="index.php?c=user&f=login" class="link">Inicia sesión aquí</a></p>
+      <p>Ya tienes una cuenta? <a href="index.php?c=user&f=login">Inicia sesión aquí</a></p>
     </div>
   </main>
-
   <?php require_once FOOTER; ?>
 </body>
 

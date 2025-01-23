@@ -41,12 +41,23 @@
 }
 
 /* Botón genérico */
-
+.btn {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 10px 20px; /* Padding similar al de los botones */
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    max-width: 350px; /* Limita el tamaño máximo del botón */
+}
 
 /* Botón de actualizar */
 .btn-primary {
     background-color: #0066ff;
     color: #fff;
+    border: none;
 }
 
 .btn-primary:hover {
@@ -58,6 +69,7 @@
 .btn-danger {
     background-color: #ff4444;
     color: #fff;
+    border: none;
 }
 
 .btn-danger:hover {
@@ -65,7 +77,20 @@
     box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
 }
 
-/* Estilos para los campos de entrada, textarea y select */
+/* Estilos para los inputs, textareas y selects */
+.form-input, 
+.form-textarea, 
+.form-select {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1rem;
+    padding: 8px 10px;
+    border: 1px solid #9CA3AF;
+    border-radius: 5px;
+    font-family: system-ui, 'Segoe UI';
+    margin-bottom: 20px;
+    max-width: 350px; /* Limita el tamaño máximo del input */
+}
 
 /* Responsividad */
 @media screen and (max-width: 768px) {
