@@ -1,4 +1,8 @@
 <?php
+if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js|ico)$/', $_SERVER["REQUEST_URI"])) {
+    return false;
+}
+
 // FrontController
 require_once __DIR__ . '/conf/ConfigPaths.php';
 
