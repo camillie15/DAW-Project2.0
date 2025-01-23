@@ -1,6 +1,6 @@
 <?php
-require_once 'repository/FAQDAO.php';
-require_once 'model/FAQ.php';
+require_once __DIR__ . '/../repository/FAQDAO.php';
+require_once __DIR__ . '/../model/FAQ.php';
 
 class FAQController
 {

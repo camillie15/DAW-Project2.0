@@ -1,9 +1,9 @@
 <?php
-require_once 'model/User.php';
-require_once 'model/Guarantee.php';
-require_once 'repository/GuaranteeDAO.php';
-require_once 'repository/GuaranteeReasonsDAO.php';
-require_once 'repository/UserDAO.php';
+require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../model/Guarantee.php';
+require_once __DIR__ . '/../repository/GuaranteeDAO.php';
+require_once __DIR__ . '/../repository/GuaranteeReasonsDAO.php';
+require_once __DIR__ . '/../repository/UserDAO.php';
 
 class GuaranteeController
 {
@@ -33,7 +33,7 @@ class GuaranteeController
 
     public function index()
     {
-        require_once "view/statics/guarantee.static.php";
+        require_once __DIR__ . "/../view/statics/guarantee.static.php";
     }
 
     public function insertForm()
@@ -83,7 +83,7 @@ class GuaranteeController
             $guarantees[$index]['requestStatusName'] = $this->getRequestStatusName($guarantee['requestStatus']);
         }
 
-        require_once 'view/guarantee/guarantee.list.php';
+        require_once __DIR__ . '/../view/guarantee/guarantee.list.php';
     }
 
     public function editForm()
@@ -101,7 +101,7 @@ class GuaranteeController
             require_once VGUARANTEE . 'edit.php';
         } else {
             $errorMessage = "No se encontró la garantía.";
-            require_once 'view/statics/error.php';
+            require_once __DIR__ . '/../view/statics/error.php';
         }
     }
 
@@ -166,7 +166,7 @@ class GuaranteeController
             header("Location: index.php?c=guarantee&f=listGuarantees");
         } else {
             $errorMessage = "No se encontró la garantía.";
-            require_once 'view/statics/error.php';
+            require_once __DIR__ . '/../view/statics/error.php';
         }
     }
 

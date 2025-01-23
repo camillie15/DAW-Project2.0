@@ -1,7 +1,7 @@
 <?php
-require_once 'model/User.php';
-require_once 'model/Returns.php';
-require_once 'repository/ReturnsDAO.php';
+require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../model/Returns.php';
+require_once __DIR__ . '/../repository/ReturnsDAO.php';
 class ReturnsController
 {
 
@@ -20,7 +20,7 @@ class ReturnsController
     public function index()
     {
         $this->returnToHome(1);
-        require_once 'view/statics/return.static.php';
+        require_once __DIR__ . '/../view/statics/return.static.php';
     }
 
 
@@ -31,7 +31,7 @@ class ReturnsController
     public function insert_view()
     {
         $this->returnToHome(1);
-        require_once 'view/return/return.insert.php';
+        require_once __DIR__ . '/../view/return/return.insert.php';
     }
 
     //Client
@@ -74,7 +74,7 @@ class ReturnsController
         $title = "Historial de peticiones de devolucion";
         $returns = [];
         $returns = $this->returnRepository->searchReturnsRequestById($userId);
-        require_once 'view/return/return.list.php';
+        require_once __DIR__ . '/../view/return/return.list.php';
     }
 
     /**
@@ -86,7 +86,7 @@ class ReturnsController
         $this->returnToHome(2);
         $title = "Gestion peticiones de devolucion";
         $returns = $this->returnRepository->listReturnsRequests();
-        require_once 'view/return/return.list.php';
+        require_once __DIR__ . '/../view/return/return.list.php';
     }
 
     /**
@@ -98,7 +98,7 @@ class ReturnsController
         $this->returnToHome(1);
         $returnId = $_GET['id'];
         $return = $this->returnRepository->searchReturnRequestById($returnId);
-        require_once 'view/return/return.update.php';
+        require_once __DIR__ . '/../view/return/return.update.php';
     }
 
     //Client

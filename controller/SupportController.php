@@ -1,12 +1,12 @@
 <?php
-require_once 'model/User.php';
+require_once __DIR__ . '/../model/User.php';
 
 date_default_timezone_set('America/Guayaquil');
-require_once 'model/SupportRequest.php';
-require_once 'model/SupportResponse.php';
-require_once 'repository/SupportRequestDAO.php';
-require_once 'repository/SupportResponseDAO.php';
-require_once 'repository/UserDAO.php';
+require_once __DIR__ . '/../model/SupportRequest.php';
+require_once __DIR__ . '/../model/SupportResponse.php';
+require_once __DIR__ . '/../repository/SupportRequestDAO.php';
+require_once __DIR__ . '/../repository/SupportResponseDAO.php';
+require_once __DIR__ . '/../repository/UserDAO.php';
 
 class SupportController{
     private $supportRequestDAO;

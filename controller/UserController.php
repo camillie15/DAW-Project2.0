@@ -22,7 +22,7 @@ class UserController
     public function perfil()
     {
         // Aquí debes verificar si los datos han sido actualizados o no
-        require_once 'view/user/user.perfil.php';
+        require_once __DIR__ . '/../view/user/user.perfil.php';
     }
 
     // Método para redirigir al formulario de actualización
@@ -30,7 +30,7 @@ class UserController
     {
 
         // Cargar la vista de actualización con los datos del usuario
-        require_once 'view/user/user.update.php';
+        require_once __DIR__ . '/../view/user/user.update.php';
     }
 
     // Método para procesar la actualización de datos
@@ -98,7 +98,7 @@ class UserController
     public function login()
     {
         $this->verifyLogin();
-        require_once 'view/user/user.login.php';
+        require_once __DIR__ . '/../view/user/user.login.php';
     }
 
     // Método para procesar el login
@@ -134,7 +134,7 @@ class UserController
     // Método para mostrar el formulario de registro
     public function register()
     {
-        require_once 'view/user/user.register.php';
+        require_once __DIR__ . '/../view/user/user.register.php';
     }
 
     // Método para procesar el registro

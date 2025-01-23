@@ -1,6 +1,6 @@
 <?php
 
-require_once 'conf/Connection.php';
+require_once __DIR__ . '/../conf/Connection.php';
 
 class SupportRequestDAO{
 
