@@ -7,7 +7,7 @@
         } else {
             //Logica de retorno al login
         } */
-        $this->verifyLogin();
+        // $this->verifyLogin();
        require __DIR__ . '/../view/homeView.php';
     }
 
