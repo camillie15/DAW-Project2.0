@@ -8,9 +8,9 @@ class FAQController
 
     public function __construct()
     {   
-        if(!isset($_SESSION)){
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
-        }
+        }        
         $this->faqDAO = new FAQDAO();
     }
 

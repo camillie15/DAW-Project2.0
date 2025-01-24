@@ -14,9 +14,10 @@ class SupportController{
     private $userDao;
 
     public function __construct(){
-        if(!isset($_SESSION)){
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+        
         $this->supportRequestDAO = new SupportRequestDAO();
         $this->supportResponseDAO = new SupportResponseDAO();
         $this->userDao = new UserDAO();

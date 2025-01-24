@@ -10,9 +10,10 @@ class UserController
     // Método para mostrar el formulario de login
     public function __construct()
     {
-        if (!isset($_SESSION)) {
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+        
     }
 
     public function index()
@@ -171,9 +172,10 @@ class UserController
     }
     public function logout()
     {        
-        if (!isset($_SESSION)) {
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+        
         session_unset();
         session_destroy();
         header('Location: index.php?c=user&f=login');
