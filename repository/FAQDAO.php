@@ -16,7 +16,7 @@ class FAQDAO
     {
         try {
             // Consulta SQL para insertar FAQ
-            $script = "INSERT INTO frequentquestions (question, answer, author, categoryId, priority, creationDate, status) 
+            $script = "INSERT INTO frequentQuestions (question, answer, author, categoryId, priority, creationDate, status) 
                        VALUES (?, ?, ?, ?, ?, ?, ?)";
     
             // Preparar la sentencia
@@ -57,7 +57,7 @@ class FAQDAO
     public function listAllFAQs()
     {
         try {
-            $script = "SELECT * FROM frequentquestions WHERE status = 1 ORDER BY creationDate DESC";
+            $script = "SELECT * FROM frequentQuestions WHERE status = 1 ORDER BY creationDate DESC";
             $stmt = $this->connection->prepare($script);
             $stmt->execute();
 
@@ -85,7 +85,7 @@ class FAQDAO
     public function searchFAQs($keyword = null, $categoryId = null)
     {
         try {
-            $script = "SELECT * FROM frequentquestions WHERE status = 1";
+            $script = "SELECT * FROM frequentQuestions WHERE status = 1";
             
             // Filtrar por palabra clave o categoría si se proporcionan
             if (!empty($keyword)) {
@@ -131,7 +131,7 @@ class FAQDAO
     public function getFAQById($faqId)
     {
         try {
-            $script = "SELECT * FROM frequentquestions WHERE frequentQuestionId = :faqId";
+            $script = "SELECT * FROM frequentQuestions WHERE frequentQuestionId = :faqId";
             $stmt = $this->connection->prepare($script);
             $stmt->bindParam(":faqId", $faqId, PDO::PARAM_INT);
             $stmt->execute();
@@ -159,7 +159,7 @@ class FAQDAO
     /*----------UPDATE----------*/
     public function updateFAQ($faq) {
         try {
-            $query = "UPDATE frequentquestions 
+            $query = "UPDATE frequentQuestions 
                       SET question = :question, 
                           answer = :answer, 
                           author = :author, 
@@ -193,7 +193,7 @@ class FAQDAO
     public function deleteFAQ($faqId)
     {
         try {
-            $script = "UPDATE frequentquestions SET status = 0 WHERE frequentQuestionId = :faqId";
+            $script = "UPDATE frequentQuestions SET status = 0 WHERE frequentQuestionId = :faqId";
             $stmt = $this->connection->prepare($script);
             $stmt->bindParam(":faqId", $faqId, PDO::PARAM_INT);
             return $stmt->execute();
