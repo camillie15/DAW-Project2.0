@@ -17,7 +17,9 @@ class GuaranteeController
 
     public function __construct()
     {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $this->guaranteeDAO = new GuaranteeDAO();
         $this->guaranteeReasonDAO = new GuaranteeReasonsDAO();
         $this->userDAO = new UserDAO();
