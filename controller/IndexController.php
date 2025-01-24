@@ -12,7 +12,7 @@
     }
 
     private function verifyLogin(){
-        if (isset($_SESSION['userLoged'])) {
+        if (!isset($_SESSION['userLogged'])) {
             header('Location: index.php?c=user&f=login');
             exit();
         }
