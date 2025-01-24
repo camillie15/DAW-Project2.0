@@ -134,7 +134,6 @@ class SupportController{
         if(empty(trim($_POST['subject'])) || empty(trim($_POST['description']))){
             $_SESSION['message'] = "Datos incompletos para la solicitud";
             return null;
-            exit();
         }
         return $supportRequest;
     }
@@ -188,7 +187,6 @@ class SupportController{
         if(empty(htmlentities(trim($_POST['response'])))){
             $_SESSION['message'] = "Datos incompletos para la respuesta";
             return null;
-            exit();
         }
         return $supportResponse;
     }
