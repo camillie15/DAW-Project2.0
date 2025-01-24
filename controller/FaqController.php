@@ -7,7 +7,10 @@ class FAQController
     private $faqDAO;
 
     public function __construct()
-    {
+    {   
+        if(!isset($_SESSION)){
+            session_start();
+        }
         $this->faqDAO = new FAQDAO();
     }
 
