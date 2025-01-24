@@ -8,16 +8,8 @@
     ],
     "routes": [
       {
-        "src": "/assets/css/(.*)",
-        "dest": "/assets/css/(.*)"
-      },
-      {
-        "src": "/assets/img/(.*)",
-        "dest": "/assets/img/(.*)"
-      },
-      {
-        "src": "/assets/js/(.*)",
-        "dest": "/assets/js/(.*)"
+        "src": "/(css|js|img)/(.*)",
+        "dest": "assets/$1/$2"
       },
       {
         "src": "/(.*)",
