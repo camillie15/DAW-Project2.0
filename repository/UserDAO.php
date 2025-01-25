@@ -66,16 +66,16 @@ class UserDAO
     {
         try {
             $script = "UPDATE users 
-                   SET firstName = ?, lastName = ?, userName = ?, email = ?, password = ? 
-                   WHERE userId = ?";
+                   SET firstName = :firstName, lastName = :lastName, userName = :userName, email = :email, password = :password 
+                   WHERE userId = :userId";
             $stmt = $this->connection->prepare($script);
 
-            $stmt->bindParam(1, $user->getFirstName(), PDO::PARAM_STR);
-            $stmt->bindParam(2, $user->getLastName(), PDO::PARAM_STR);
-            $stmt->bindParam(3, $user->getUserName(), PDO::PARAM_STR);
-            $stmt->bindParam(4, $user->getEmail(), PDO::PARAM_STR);
-            $stmt->bindParam(5, $user->getPassword(), PDO::PARAM_STR);
-            $stmt->bindParam(6, $user->getIdUser(), PDO::PARAM_INT);
+            $stmt->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STR);
+            $stmt->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
+            $stmt->bindValue(':userName', $user->getUserName(), PDO::PARAM_STR);
+            $stmt->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+            $stmt->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
+            $stmt->bindValue(':userId', $user->getIdUser(), PDO::PARAM_INT);
 
             return $stmt->execute();
         } catch (PDOException $e) {
