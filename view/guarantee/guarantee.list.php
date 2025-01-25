@@ -1,6 +1,6 @@
 <?php require_once HEADER; ?>
 
-<main class="main-content-guarantee">
+<main class="main-content-guarantee guarantee-main">
     <section class="guarantee-list">
         <h2 class="page-title">Lista de solicitudes de garantía</h2>
         <?php if ($_SESSION['userLogged']->getUserRole() == 1): ?>

@@ -1,13 +1,17 @@
 <?php
-require_once 'repository/FAQDAO.php';
-require_once 'model/FAQ.php';
+require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../repository/FAQDAO.php';
+require_once __DIR__ . '/../model/FAQ.php';
 
 class FAQController
 {
     private $faqDAO;
 
     public function __construct()
-    {
+    {   
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }        
         $this->faqDAO = new FAQDAO();
     }
 

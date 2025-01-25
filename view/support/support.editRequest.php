@@ -1,7 +1,8 @@
 <?php
-if (!isset($_SESSION)) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 if (!$supportRequest) {
     echo "No se encontraron datos para la solicitud de soporte.";
     exit();

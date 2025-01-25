@@ -7,12 +7,12 @@
         } else {
             //Logica de retorno al login
         } */
-        //$this->verifyLogin();
-       require 'view/homeView.php';
+        // $this->verifyLogin();
+       require __DIR__ . '/../view/homeView.php';
     }
 
     private function verifyLogin(){
-        if (isset($_SESSION['userLoged'])) {
+        if (!isset($_SESSION['userLogged'])) {
             header('Location: index.php?c=user&f=login');
             exit();
         }

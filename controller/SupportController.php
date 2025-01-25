@@ -1,12 +1,12 @@
 <?php
-require_once 'model/User.php';
+require_once __DIR__ . '/../model/User.php';
 
 date_default_timezone_set('America/Guayaquil');
-require_once 'model/SupportRequest.php';
-require_once 'model/SupportResponse.php';
-require_once 'repository/SupportRequestDAO.php';
-require_once 'repository/SupportResponseDAO.php';
-require_once 'repository/UserDao.php';
+require_once __DIR__ . '/../model/SupportRequest.php';
+require_once __DIR__ . '/../model/SupportResponse.php';
+require_once __DIR__ . '/../repository/SupportRequestDAO.php';
+require_once __DIR__ . '/../repository/SupportResponseDAO.php';
+require_once __DIR__ . '/../repository/UserDAO.php';
 
 class SupportController{
     private $supportRequestDAO;
@@ -14,15 +14,18 @@ class SupportController{
     private $userDao;
 
     public function __construct(){
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         $this->supportRequestDAO = new SupportRequestDAO();
         $this->supportResponseDAO = new SupportResponseDAO();
-        $this->userDao = new UserDao();
+        $this->userDao = new UserDAO();
     }
 
     private function checkRole($rol) {
         if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']->getUserRole() != $rol) {
-            Header("Location: index.php");
+            header("Location: index.php");
             exit();
         }
     }
@@ -41,7 +44,7 @@ class SupportController{
                     $request['userName'] = $user['userName'];                }
             }
         }else{
-            Header("Location: index.php");
+            header("Location: index.php");
             exit();
         }
         require_once VSUPPORT . 'list.php';
@@ -59,8 +62,9 @@ class SupportController{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $supportRequest = $this->setDataRequest();
             if($supportRequest != null){
-                $this->supportRequestDAO->insertSupportRequest($supportRequest);
-                $_SESSION['message'] = "Solicitud creada exitosamente";    
+                if($this->supportRequestDAO->insertSupportRequest($supportRequest)) {
+                    $_SESSION['message'] = "Solicitud creada exitosamente";    
+                }
             } 
             header("Location: index.php?c=support&f=show_requests");           
         }
@@ -130,7 +134,6 @@ class SupportController{
         if(empty(trim($_POST['subject'])) || empty(trim($_POST['description']))){
             $_SESSION['message'] = "Datos incompletos para la solicitud";
             return null;
-            exit();
         }
         return $supportRequest;
     }
@@ -184,7 +187,6 @@ class SupportController{
         if(empty(htmlentities(trim($_POST['response'])))){
             $_SESSION['message'] = "Datos incompletos para la respuesta";
             return null;
-            exit();
         }
         return $supportResponse;
     }

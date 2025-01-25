@@ -1,8 +1,8 @@
 <?php
 // controllers/UserController.php
 
-require_once 'model/User.php';
-require_once 'repository/UserDAO.php';
+require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../repository/UserDAO.php';
 
 class UserController
 {
@@ -10,19 +10,22 @@ class UserController
     // Método para mostrar el formulario de login
     public function __construct()
     {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
     }
 
     public function index()
     {
         $this->verifyLogin();
-        require_once 'view/loginView.php';
+        require_once __DIR__ . '/../view/loginView.php';
     }
 
     public function perfil()
     {
         // Aquí debes verificar si los datos han sido actualizados o no
-        require_once 'view/user/user.perfil.php';
+        require_once __DIR__ . '/../view/user/user.perfil.php';
     }
 
     // Método para redirigir al formulario de actualización
@@ -30,7 +33,7 @@ class UserController
     {
 
         // Cargar la vista de actualización con los datos del usuario
-        require_once 'view/user/user.update.php';
+        require_once __DIR__ . '/../view/user/user.update.php';
     }
 
     // Método para procesar la actualización de datos
@@ -98,7 +101,7 @@ class UserController
     public function login()
     {
         $this->verifyLogin();
-        require_once 'view/user/user.login.php';
+        require_once __DIR__ . '/../view/user/user.login.php';
     }
 
     // Método para procesar el login
@@ -130,7 +133,7 @@ class UserController
     // Método para mostrar el formulario de registro
     public function register()
     {
-        require_once 'view/user/user.register.php';
+        require_once __DIR__ . '/../view/user/user.register.php';
     }
 
     // Método para procesar el registro
@@ -158,17 +161,21 @@ class UserController
             if ($userDAO->register($user)) {
                 // Redirigir a la página de login
                 header('Location: index.php?c=user&f=login');
+                exit();
             } else {
                 echo "Error al registrar el usuario.";
             }
         }
     }
     public function logout()
-    {
-        session_start();
+    {        
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         session_unset();
         session_destroy();
-        header('Location: index.php?c=user&f=login');
+        header('location: index.php?c=user&f=login');
         exit();
     }
 }

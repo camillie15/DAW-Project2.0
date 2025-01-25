@@ -30,7 +30,7 @@
             </div>
             <div>
                 <label for="description">Descripción a detalle del problema <span style="color: #f04;">*</span></label>
-                <textarea name="description" id="description" maxlength="250" placeholder="Detallar la desripcion aquí" required></textarea>
+                <textarea name="description" id="description" maxlength="250" placeholder="Detallar la descripción aquí" required></textarea>
             </div>
             <div class="container-btn">
                 <button class="btn-return st-btn-one">Crear peticion</button>

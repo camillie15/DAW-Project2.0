@@ -2,7 +2,7 @@
 
 <main class="main-content">
     <section class="container-rules-guarantee">
-        <h2 class="page-title">SOLICITUD DE GARANTÍA</h2>
+        <h2 class="page-title" style="color: #2f32ec">SOLICITUD DE GARANTÍA</h2>
         <h3 class="guarantee-subtitle">Requisitos para solicitar una garantía</h3>
         <p style="margin: 0px;">Antes de realizar la solicitud de garantía de su producto, tenga en cuenta los siguientes requisitos:</p>
         <ul>

@@ -1,7 +1,8 @@
 <?php 
-if (!isset($_SESSION)) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 ?>
 <?php require_once HEADER ?>
 <main class="main-support">

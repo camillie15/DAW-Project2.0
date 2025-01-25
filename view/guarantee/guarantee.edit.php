@@ -3,7 +3,7 @@
     $minDate = date('Y-m-d', strtotime('-1 year'));
 ?>
 
-<main class="main-content">
+<main class="main-content guarantee-main">
     <h2 class="page-title">Editar Solicitud de Garantía</h2>
 
     <?php if (isset($errorMessage)) { ?>
@@ -16,13 +16,13 @@
         <input type="hidden" name="guaranteeId" value="<?php echo $guarantee['guaranteeId']; ?>" />
 
         <div class="form-group">
-            <label for="purchaseDate">Fecha de la Compra:</label>
+            <label for="purchaseDate">Fecha de la Compra: <span style="color: #f04;">*</span></label>
             <input type="date" id="purchaseDate" name="purchaseDate" min="<?php echo $minDate; ?>" max="<?php echo $maxDate; ?>"
                 value="<?php echo isset($formData['purchaseDate']) ? htmlspecialchars($formData['purchaseDate']) : date('Y-m-d', strtotime($guarantee['purchaseDate'])); ?>" required />
         </div>
 
         <div class="form-group">
-            <label for="warrantyReasonId">Razón de Garantía:</label>
+            <label for="warrantyReasonId">Razón de Garantía: <span style="color: #f04;">*</span></label>
             <select id="warrantyReasonId" name="warrantyReasonId" required>
                 <option value="" disabled <?php echo empty($formData['warrantyReasonId']) ? 'selected' : ''; ?>>Selecciona el motivo</option>
                 <?php foreach ($guaranteeReasons as $reason) { ?>
@@ -36,8 +36,8 @@
         </div>
 
         <div class="form-group">
-            <label for="productCode">Código del Producto:</label>
-            <input type="text" id="productCode" name="productCode"
+            <label for="productCode">Código del Producto: <span style="color: #f04;">*</span></label>
+            <input type="text" id="productCode" name="productCode" placeholder="PRXXXXXXXXXXXX" minlength="13" maxlength="13"
                 value="<?php echo isset($formData['productCode']) ? htmlspecialchars($formData['productCode']) : htmlspecialchars($guarantee['productCode']); ?>" required />
             <?php if (isset($error) && in_array("El código del producto es requerido.", $error)) { ?>
                 <p class="error-msg-guarantee">El código del producto es requerido.</p>
@@ -45,8 +45,8 @@
         </div>
 
         <div class="form-group">
-            <label for="invoiceCode">Código de Factura:</label>
-            <input type="text" id="invoiceCode" name="invoiceCode"
+            <label for="invoiceCode">Código de Factura: <span style="color: #f04;">*</span></label>
+            <input type="text" id="invoiceCode" name="invoiceCode" placeholder="FAXXXXXXXXXXXX" minlength="13" maxlength="13"
                 value="<?php echo isset($formData['invoiceCode']) ? htmlspecialchars($formData['invoiceCode']) : htmlspecialchars($guarantee['invoiceCode']); ?>" required />
             <?php if (isset($error) && in_array("El código de factura es requerido.", $error)) { ?>
                 <p class="error-msg-guarantee">El código de factura es requerido.</p>
@@ -54,8 +54,8 @@
         </div>
 
         <div class="form-group">
-            <label for="description">Descripción:</label>
-            <textarea id="description" name="description" rows="4" required><?php echo isset($formData['description']) ? htmlspecialchars($formData['description']) : htmlspecialchars($guarantee['description']); ?></textarea>
+            <label for="description">Descripción: <span style="color: #f04;">*</span></label>
+            <textarea id="description" name="description" rows="4" required placeholder="Detallar la descripción aquí" maxlength="250"><?php echo isset($formData['description']) ? htmlspecialchars($formData['description']) : htmlspecialchars($guarantee['description']); ?></textarea>
             <?php if (isset($error) && in_array("La descripción es requerida.", $error)) { ?>
                 <p class="error-msg-guarantee">La descripción es requerida.</p>
             <?php } ?>

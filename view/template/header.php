@@ -1,6 +1,9 @@
 <?php
-require_once 'model/User.php';
-if (!isset($_SESSION)) session_start();
+require_once __DIR__ . '/../../model/User.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 // Verificar si el usuario está logueado
 if (!empty($_SESSION['userLogged'])) {
   $user = $_SESSION['userLogged'];
