@@ -25,7 +25,7 @@ class SupportController{
 
     private function checkRole($rol) {
         if (!isset($_SESSION['userLogged']) || $_SESSION['userLogged']->getUserRole() != $rol) {
-            Header("Location: index.php");
+            header("Location: index.php");
             exit();
         }
     }
@@ -44,7 +44,7 @@ class SupportController{
                     $request['userName'] = $user['userName'];                }
             }
         }else{
-            Header("Location: index.php");
+            header("Location: index.php");
             exit();
         }
         require_once VSUPPORT . 'list.php';

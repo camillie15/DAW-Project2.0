@@ -178,7 +178,7 @@ class UserController
         
         session_unset();
         session_destroy();
-        header('Location: index.php?c=user&f=login');
+        header('location: index.php?c=user&f=login');
         exit();
     }
 }
