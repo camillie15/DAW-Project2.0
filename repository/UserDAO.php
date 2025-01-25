@@ -30,8 +30,8 @@ class UserDAO
             $stmt->bindParam(6, $user->getUserRole(), PDO::PARAM_INT);
             $stmt->bindParam(7, $user->getStatus(), PDO::PARAM_INT);
 
-            $result = $stmt->execute();
-            return $result;
+            $stmt->execute();
+            return true;
         } catch (PDOException $e) {
             error_log("Fail register user: " . $e->getMessage(), 0);
             return false;
