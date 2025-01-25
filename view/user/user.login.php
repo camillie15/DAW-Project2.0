@@ -13,9 +13,7 @@
   <main class="main">
     <div class="profile-container">
       <h1>Login</h1>
-      <?php if (isset($_GET['error']) && $_GET['error'] == '1'): ?>
-        <p class="error-msg" style="color: red; font-weight: bold;">Usuario o contraseña incorrectos.</p>
-      <?php endif; ?>
+
       <form method="POST" action="index.php?c=user&f=processLogin" class="form-container login-form">
         <label for="userName" class="form-label">Username</label>
         <input type="text" id="userName" name="userName" class="form-input" required>
@@ -24,7 +22,15 @@
         <input type="password" id="password" name="password" class="form-input" required>
 
         <button type="submit" class="btn btn-primary">Login</button>
+
+        <?php if (isset($_SESSION['login_error'])): ?>
+          <p class="error-msg" style="color: red; font-weight: bold; margin-top: 10px;">
+            <?= $_SESSION['login_error']; ?>
+          </p>
+          <?php unset($_SESSION['login_error']); ?>  <!-- Limpiar mensaje después de mostrarlo -->
+        <?php endif; ?>
       </form>
+
       <p>No tienes cuenta? <a href="index.php?c=user&f=register">Regístrate aquí</a></p>
     </div>
   </main>
