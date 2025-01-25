@@ -19,16 +19,16 @@ class UserDAO
     {
         try {
             $script = "INSERT INTO users (firstName, lastName, userName, email, password, userRole, status) 
-                       VALUES (?, ?, ?, ?, ?, ?, ?)";
+                       VALUES (:firstName, :lastName, :userName, :email, :password, :userRole, :status)";
             $stmt = $this->connection->prepare($script);
 
-            $stmt->bindParam(1, $user->getFirstName(), PDO::PARAM_STR);
-            $stmt->bindParam(2, $user->getLastName(), PDO::PARAM_STR);
-            $stmt->bindParam(3, $user->getUserName(), PDO::PARAM_STR);
-            $stmt->bindParam(4, $user->getEmail(), PDO::PARAM_STR);
-            $stmt->bindParam(5, $user->getPassword(), PDO::PARAM_STR);
-            $stmt->bindParam(6, $user->getUserRole(), PDO::PARAM_INT);
-            $stmt->bindParam(7, $user->getStatus(), PDO::PARAM_INT);
+            $stmt->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STR);
+            $stmt->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
+            $stmt->bindValue(':userName', $user->getUserName(), PDO::PARAM_STR);
+            $stmt->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+            $stmt->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
+            $stmt->bindValue(':userRole', $user->getUserRole(), PDO::PARAM_INT);
+            $stmt->bindValue(':status', $user->getStatus(), PDO::PARAM_INT);
 
             $stmt->execute();
             return true;
