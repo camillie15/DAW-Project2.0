@@ -165,6 +165,7 @@ class UserController
             if ($userDAO->register($user)) {
                 // Redirigir a la página de login
                 header('Location: index.php?c=user&f=login');
+                exit();
             } else {
                 echo "Error al registrar el usuario.";
             }
