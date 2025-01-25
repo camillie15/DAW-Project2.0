@@ -1,4 +1,5 @@
 <?php
+// autor: Jimmy Josue Paez Velasco
 
 require_once __DIR__ . '/../conf/Connection.php';
 

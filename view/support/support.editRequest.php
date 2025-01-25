@@ -1,4 +1,4 @@
-<?php
+<?php     // autor: Camillie Thais Ayovi Villafuerte
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -6,6 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 if (!$supportRequest) {
     echo "No se encontraron datos para la solicitud de soporte.";
     exit();
+
 }
 $selectedLanguage = html_entity_decode($supportRequest['language'], ENT_QUOTES, 'UTF-8');
 $selectedPriority = htmlspecialchars($supportRequest['priority']);

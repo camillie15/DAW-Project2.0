@@ -1,4 +1,6 @@
-<?php require_once HEADER; ?>
+<?php require_once HEADER; 
+// autor: Daniel Mateo Aguilar Villafuerte
+?>
 
 <main class="profile-container">
     <h1 class="user-title">Actualizar Datos</h1>

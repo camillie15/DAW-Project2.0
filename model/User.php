@@ -1,4 +1,6 @@
 <?php
+// autor: Daniel Mateo Aguilar Villafuerte
+
 // model/User.php
 
 class User {

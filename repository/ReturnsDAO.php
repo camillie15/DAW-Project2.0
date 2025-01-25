@@ -1,4 +1,5 @@
 <?php
+// autor: Erick Alejandro Cordova Viteri
 
 require_once __DIR__ . '/../conf/Connection.php';
 class ReturnsDAO

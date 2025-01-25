@@ -1,4 +1,6 @@
 <?php
+// autor: Camillie Thais Ayovi Villafuerte
+
 require_once __DIR__ . '/../model/User.php';
 
 date_default_timezone_set('America/Guayaquil');

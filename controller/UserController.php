@@ -1,4 +1,6 @@
 <?php
+// autor: Daniel Mateo Aguilar Villafuerte
+
 // controllers/UserController.php
 
 require_once __DIR__ . '/../model/User.php';

@@ -1,4 +1,6 @@
 <?php
+// autor: Cesar Alexander Tipan Anton
+
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../model/Guarantee.php';
 require_once __DIR__ . '/../repository/GuaranteeDAO.php';
