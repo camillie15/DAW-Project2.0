@@ -1,4 +1,5 @@
 <?php
+// autor: Erick Alejandro Cordova Viteri
 class Returns
 {
     private $returnId, $userId, $requestDate, $purchaseDate, $productStatus, $productCode, $invoiceCode, $description, $requestStatus, $status;

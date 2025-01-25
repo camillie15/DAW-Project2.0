@@ -1,4 +1,6 @@
-<?php require_once HEADER ?>
+<?php require_once HEADER 
+// autor: Jimmy Josue Paez Velasco
+?>
 
 <main class="container-faqs">
     <!-- Sección para agregar nueva FAQ -->

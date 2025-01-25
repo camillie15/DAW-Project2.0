@@ -1,4 +1,6 @@
-<?php require_once HEADER; ?>
+<?php require_once HEADER; 
+// autor: Cesar Alexander Tipan Anton
+?>
 
 <main class="main-content-guarantee guarantee-main">
     <section class="guarantee-list">

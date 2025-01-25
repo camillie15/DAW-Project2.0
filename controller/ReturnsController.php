@@ -1,4 +1,6 @@
 <?php
+// autor: Erick Alejandro Cordova Viteri
+
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../model/Returns.php';
 require_once __DIR__ . '/../repository/ReturnsDAO.php';

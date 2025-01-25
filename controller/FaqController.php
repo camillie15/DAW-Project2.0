@@ -1,4 +1,6 @@
 <?php
+// autor: Jimmy Josue Paez Velasco
+
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../repository/FAQDAO.php';
 require_once __DIR__ . '/../model/FAQ.php';

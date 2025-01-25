@@ -1,6 +1,7 @@
 <?php require_once HEADER; 
     $maxDate = date('Y-m-d');
     $minDate = date('Y-m-d', strtotime('-1 year'));
+    // autor: Cesar Alexander Tipan Anton
 ?>
 
 <main class="main-content guarantee-main">
