@@ -16,19 +16,19 @@ class ReturnsDAO
     {
         try {
             $script = "INSERT INTO returns ( requestDate, purchaseDate ,invoiceCode, productStatus, productCode, description, requestStatus, status, userId) 
-            VALUES (?,?,?,?,?,?,?,?, ?)";
+            VALUES (:requestDate ,:purchaseDate ,:invoiceCode ,:productStatus ,:productCode ,:description ,:requestStatus ,:status ,:userId)";
 
             $stmt = $this->connection->prepare($script);
 
-            $stmt->bindParam(1, $return->getRequestDate(), PDO::PARAM_STR);
-            $stmt->bindParam(2, $return->getPurchaseDate(), PDO::PARAM_STR);
-            $stmt->bindParam(3, $return->getInvoiceCode(), PDO::PARAM_STR);
-            $stmt->bindParam(4, $return->getProductStatus(), PDO::PARAM_STR);
-            $stmt->bindParam(5, $return->getProductCode(), PDO::PARAM_STR);
-            $stmt->bindParam(6, $return->getDescription(), PDO::PARAM_STR);
-            $stmt->bindParam(7, $return->getRequestStatus(), PDO::PARAM_INT);
-            $stmt->bindParam(8, $return->getStatus(), PDO::PARAM_INT);
-            $stmt->bindParam(9, $return->getUserId(), PDO::PARAM_INT); 
+            $stmt->bindValue(':requestDate', $return->getRequestDate(), PDO::PARAM_STR);
+            $stmt->bindValue(':purchaseDate', $return->getPurchaseDate(), PDO::PARAM_STR);
+            $stmt->bindValue(':invoiceCode', $return->getInvoiceCode(), PDO::PARAM_STR);
+            $stmt->bindValue(':productStatus', $return->getProductStatus(), PDO::PARAM_STR);
+            $stmt->bindValue(':productCode', $return->getProductCode(), PDO::PARAM_STR);
+            $stmt->bindValue(':description', $return->getDescription(), PDO::PARAM_STR);
+            $stmt->bindValue(':requestStatus', $return->getRequestStatus(), PDO::PARAM_INT);
+            $stmt->bindValue(':status', $return->getStatus(), PDO::PARAM_INT);
+            $stmt->bindValue(':userId', $return->getUserId(), PDO::PARAM_INT); 
 
             return $stmt->execute();
         } catch (PDOException $e) {
@@ -125,12 +125,12 @@ class ReturnsDAO
         try {
             $script = "UPDATE returns SET purchaseDate = :purchaseDate, productStatus = :productStatus, productCode = :productCode, invoiceCode = :invoiceCode, description = :description WHERE returnId = :returnId";
             $stmt = $this->connection->prepare($script);
-            $stmt->bindParam(":purchaseDate", $return->getPurchaseDate(), PDO::PARAM_STR);
-            $stmt->bindParam(":productStatus", $return->getProductStatus(), PDO::PARAM_STR);
-            $stmt->bindParam(":productCode", $return->getProductCode(), PDO::PARAM_STR);
-            $stmt->bindParam(":invoiceCode", $return->getInvoiceCode(), PDO::PARAM_STR);
-            $stmt->bindParam(":description", $return->getDescription(), PDO::PARAM_STR);
-            $stmt->bindParam(":returnId", $returnId, PDO::PARAM_INT);
+            $stmt->bindValue(":purchaseDate", $return->getPurchaseDate(), PDO::PARAM_STR);
+            $stmt->bindValue(":productStatus", $return->getProductStatus(), PDO::PARAM_STR);
+            $stmt->bindValue(":productCode", $return->getProductCode(), PDO::PARAM_STR);
+            $stmt->bindValue(":invoiceCode", $return->getInvoiceCode(), PDO::PARAM_STR);
+            $stmt->bindValue(":description", $return->getDescription(), PDO::PARAM_STR);
+            $stmt->bindValue(":returnId", $returnId, PDO::PARAM_INT);
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log(("Fail update request" . $e));
