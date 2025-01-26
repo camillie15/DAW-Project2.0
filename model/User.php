@@ -1,7 +1,5 @@
 <?php
-// autor: Daniel Mateo Aguilar Villafuerte
-
-// model/User.php
+// autor: Aguilar Villafuerte Daniel Mateo
 
 class User {
     private $idUser;

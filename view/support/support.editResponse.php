@@ -1,6 +1,5 @@
-<?php require_once HEADER 
-    // autor: Camillie Thais Ayovi Villafuerte
-?>
+<!--  autor: Ayovi Villafuerte Camillie Thais -->
+<?php require_once HEADER ?>
 
 <main class="main-support">
     <div class="div-form">

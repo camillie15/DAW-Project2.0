@@ -1,5 +1,5 @@
 <?php
-// autor: Camillie Thais Ayovi Villafuerte
+// autor: Ayovi Villafuerte Camillie Thais
 
 class SupportResponse{
 

@@ -1,5 +1,5 @@
 <?php
-// autor: Jimmy Josue Paez Velasco
+// autor: Paez Velasco Jimmy Josue
 
 class FAQ {
     private $faqId;

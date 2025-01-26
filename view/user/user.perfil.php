@@ -1,6 +1,5 @@
-<?php require_once HEADER; 
-// autor: Daniel Mateo Aguilar Villafuerte
-?>
+<!-- autor: Aguilar Villafuerte Daniel Mateo -->
+<?php require_once HEADER; ?>
 
 <main class="profile-container">
     <h1>Bienvenido a tu perfil, <b><?php echo $_SESSION['userLogged']->getUserName(); ?></b></h1>

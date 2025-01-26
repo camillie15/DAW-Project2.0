@@ -1,6 +1,5 @@
-<?php require_once HEADER 
-// autor: Jimmy Josue Paez Velasco
-?>
+<!-- autor: Paez Velasco Jimmy Josue -->
+<?php require_once HEADER ?>
 
 <main class="container-faqs">
 <section class="container-faq-search">

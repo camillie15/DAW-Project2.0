@@ -1,5 +1,5 @@
 <?php
-// autor: Cesar Alexander Tipan Anton
+// autor: Tipan Anton Cesar Alexander
 
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../model/Guarantee.php';

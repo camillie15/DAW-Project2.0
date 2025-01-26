@@ -1,6 +1,5 @@
-<?php require_once HEADER 
-// autor: Erick Alejandro Cordova Viteri
-?>
+<!-- autor: Cordova Viteri Erick Alejandro  -->
+<?php require_once HEADER ?>
 
 <main class="container-requirements-return">
     <section class="container-list-return">

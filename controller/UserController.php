@@ -1,7 +1,5 @@
 <?php
-// autor: Daniel Mateo Aguilar Villafuerte
-
-// controllers/UserController.php
+// autor: Aguilar Villafuerte Daniel Mateo
 
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../repository/UserDAO.php';

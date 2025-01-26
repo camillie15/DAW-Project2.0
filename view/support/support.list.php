@@ -1,4 +1,5 @@
-<?php     // autor: Camillie Thais Ayovi Villafuerte
+<!--  autor: Ayovi Villafuerte Camillie Thais -->
+<?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
