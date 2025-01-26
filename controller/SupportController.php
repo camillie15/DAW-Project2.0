@@ -1,5 +1,5 @@
 <?php
-// autor: Camillie Thais Ayovi Villafuerte
+// autor: Ayovi Villafuerte Camillie Thais
 
 require_once __DIR__ . '/../model/User.php';
 

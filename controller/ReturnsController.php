@@ -1,5 +1,5 @@
 <?php
-// autor: Erick Alejandro Cordova Viteri
+// autor: Cordova Viteri Erick Alejandro 
 
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../model/Returns.php';

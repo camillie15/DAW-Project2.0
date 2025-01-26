@@ -1,4 +1,4 @@
-<!-- // autor: Daniel Mateo Aguilar Villafuerte -->
+<!-- autor: Aguilar Villafuerte Daniel Mateo -->
 <!DOCTYPE html>
 <html lang="es">
 

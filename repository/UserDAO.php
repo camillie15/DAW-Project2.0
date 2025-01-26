@@ -1,6 +1,5 @@
 <?php
-// autor: Daniel Mateo Aguilar Villafuerte
-// repository/UserDAO.php
+// autor: Aguilar Villafuerte Daniel Mateo
 
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../conf/Connection.php';

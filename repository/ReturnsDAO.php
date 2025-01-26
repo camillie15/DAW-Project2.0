@@ -1,5 +1,5 @@
 <?php
-// autor: Erick Alejandro Cordova Viteri
+// autor: Cordova Viteri Erick Alejandro 
 
 require_once __DIR__ . '/../conf/Connection.php';
 class ReturnsDAO

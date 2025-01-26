@@ -1,5 +1,5 @@
 <?php
-// autor: Cesar Alexander Tipan Anton
+// autor: Tipan Anton Cesar Alexander
 
 class Guarantee {
     private $guaranteeId, $userId, $requestDate, $purchaseDate, $warrantyReasonId, $productCode, $invoiceCode, $description, $requestStatus, $status;

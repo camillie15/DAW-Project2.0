@@ -1,5 +1,6 @@
 <?php
-// autor: Erick Alejandro Cordova Viteri
+// autor: Cordova Viteri Erick Alejandro 
+
 class Returns
 {
     private $returnId, $userId, $requestDate, $purchaseDate, $productStatus, $productCode, $invoiceCode, $description, $requestStatus, $status;
